@@ -1,5 +1,4 @@
 package src.Story;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -29,10 +28,35 @@ public class Welcome {
                 bodyLang = "<HTML><center>Questo gioco di storia ti darà due opzioni in ogni situazione che incontri, ognuna di esse rappresenta un percorso diverso verso la fine. Hai fino a 2 storie da cui scegliere.<center></HTML>";
                 proceedButtonText = "Procedi";
                 break;
+            case "Portuguese":
+                title = "Aventura Conversacional";
+                bodyLang = "<HTML><center>Este jogo de história dar-lhe-á duas opções em cada situação que encontrar, cada uma delas representa um caminho diferente para o final. Tem até 2 histórias para escolher.<center></HTML>";
+                proceedButtonText = "Prosseguir";
+                break;
             case "French":
                 title = "Aventure Conversationnelle";
                 bodyLang = "<HTML><center>Ce jeu d'histoire vous donnera deux options dans chaque situation que vous rencontrerez, chacune d'elles représente un chemin différent vers la fin. Vous avez jusqu'à 2 histoires à choisir.<center></HTML>";
                 proceedButtonText = "Procéder";
+                break;
+            case "German":
+                title = "Konversationelle Abenteuer";
+                bodyLang = "<HTML><center>Dieses Geschichtsspiel bietet Ihnen in jeder Situation zwei Optionen, von denen jede einen anderen Weg zum Ende darstellt. Sie haben bis zu 2 Geschichten zur Auswahl.<center></HTML>";
+                proceedButtonText = "Weiter";
+                break;
+            case "Mandarin":
+                title = "会话式冒险";
+                bodyLang = "<HTML><center>这个故事游戏将为您提供在遇到的每种情况下的两个选项，它们代表着通往结局的不同路径。您最多可以选择2个故事。<center></HTML>";
+                proceedButtonText = "继续";
+                break;
+            case "Japanese":
+                title = "対話型冒険";
+                bodyLang = "<HTML><center>このストーリーゲームでは、遭遇する各状況で2つのオプションが提供され、それぞれが結末への異なる道を表しています。最大で2つのストーリーを選択できます。<center></HTML>";
+                proceedButtonText = "進む";
+                break;
+            case "Arabic":
+                title = "مغامرة الحوار";
+                bodyLang = "<HTML><center>هذه لعبة قصة ستمنحك خيارين في كل موقف تواجهه، حيث يمثل كل منهما مسارًا مختلفًا نحو النهاية. لديك ما يصل إلى 2 قصة للاختيار من بينها.<center></HTML>";
+                proceedButtonText = "المضي قدمًا";
                 break;
             default:
                 title = "Conversational Adventure";
@@ -46,6 +70,7 @@ public class Welcome {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
 
         // Create a custom JPanel for the gradient background
         JPanel gradientPanel = new JPanel() {
