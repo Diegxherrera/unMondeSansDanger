@@ -67,6 +67,8 @@ public class Welcome {
 
         // Frame declaration
         JFrame frame = new JFrame("Conversational Game | DHR");
+        ImageIcon icon = new ImageIcon("Story.png");
+        frame.setIconImage(icon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
         frame.setResizable(false);
