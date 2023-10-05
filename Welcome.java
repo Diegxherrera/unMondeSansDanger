@@ -1,5 +1,7 @@
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +17,7 @@ public class Welcome {
             case "Spanish":
                 title = "Aventura Conversacional";
                 bodyLang = "<HTML><center>Este juego de historia te dará dos opciones en cada situación que encuentres, cada una de ellas representa un camino diferente hacia el final. Tienes hasta 2 historias para elegir.<center></HTML>";
-                proceedButtonText = "Proceder";
+                proceedButtonText = "Continuar";
                 break;
             case "English":
                 title = "Conversational Adventure";

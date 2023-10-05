@@ -1,12 +1,14 @@
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 public class Languages {
-    public static void main(String args[]) {
+    public static void main() {
         // Frame declaration
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
