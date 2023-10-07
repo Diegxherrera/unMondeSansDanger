@@ -39,83 +39,83 @@ public class Story {
         frame.setContentPane(gradientPanel);
 
         // Location + Body + Panel
-        JLabel Location = new JLabel(getLocationText(language, phaseKey), SwingConstants.LEFT);
+        JLabel Location = new JLabel(getLocationText(phaseKey), SwingConstants.LEFT);
         System.out.println(phaseKey);
         Location.setFont(new Font("Segoe UI", Font.BOLD, 20));
         Location.setBorder(new EmptyBorder(35, 20, 0, 20));
 
-        JLabel Body = new JLabel(getMainOutput(language, phaseKey), SwingConstants.LEFT);
+        JLabel Body = new JLabel(getMainOutput(phaseKey), SwingConstants.LEFT);
         Body.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         Body.setBorder(new EmptyBorder(0, 20, 150, 20));
 
         JPanel Panel = new JPanel();
-        JButton O1 = new JButton(getOption1(language, phaseKey));
-        JButton O2 = new JButton(getOption2(language, phaseKey));
+        JButton O1 = new JButton(getOption1(phaseKey));
+        JButton O2 = new JButton(getOption2(phaseKey));
 
         O1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 switch (phaseKey) {
                     case "0":
-                        O1.setText(getOption1("Spanish", "1A"));
-                        Body.setText(getMainOutput("Spanish", "1A"));
-                        O2.setText(getOption2("Spanish", "1A"));
-                        Location.setText(getLocationText("Spanish", "1A"));
+                        O1.setText(getOption1("1A"));
+                        Body.setText(getMainOutput("1A"));
+                        O2.setText(getOption2("1A"));
+                        Location.setText(getLocationText("1A"));
                         phaseKey = "1A";
                         break;
                     case "1A":
-                        O1.setText(getOption1("Spanish", "2A"));
-                        Body.setText(getMainOutput("Spanish", "2A"));
-                        O2.setText(getOption2("Spanish", "2A"));
-                        Location.setText(getLocationText("Spanish", "2A"));
+                        O1.setText(getOption1("2A"));
+                        Body.setText(getMainOutput("2A"));
+                        O2.setText(getOption2("2A"));
+                        Location.setText(getLocationText("2A"));
                         phaseKey = "2A";
                         break;
                     case "1B":
-                        O1.setText(getOption1("Spanish", "2C"));
-                        Body.setText(getMainOutput("Spanish", "2C"));
-                        O2.setText(getOption2("Spanish", "2C"));
-                        Location.setText(getLocationText("Spanish", "2C"));
+                        O1.setText(getOption1("2C"));
+                        Body.setText(getMainOutput("2C"));
+                        O2.setText(getOption2("2C"));
+                        Location.setText(getLocationText("2C"));
                         phaseKey = "2C";
                         break;
                     case "2A":
-                        O1.setText(getOption1("Spanish", "3A"));
-                        Body.setText(getMainOutput("Spanish", "3A"));
-                        O2.setText(getOption2("Spanish", "3A"));
-                        Location.setText(getLocationText("Spanish", "3A"));
+                        O1.setText(getOption1("3A"));
+                        Body.setText(getMainOutput("3A"));
+                        O2.setText(getOption2("3A"));
+                        Location.setText(getLocationText("3A"));
                         phaseKey = "3A";
                         break;
                     case "3A":
-                        O1.setText(getOption1("Spanish", "4A"));
-                        Body.setText(getMainOutput("Spanish", "4A"));
-                        O2.setText(getOption2("Spanish", "4A"));
-                        Location.setText(getLocationText("Spanish", "4A"));
+                        O1.setText(getOption1("4A"));
+                        Body.setText(getMainOutput("4A"));
+                        O2.setText(getOption2("4A"));
+                        Location.setText(getLocationText("4A"));
                         phaseKey = "4A";
                         break;
                     case "3B":
-                        O1.setText(getOption1("Spanish", "4B"));
-                        Body.setText(getMainOutput("Spanish", "4B"));
-                        O2.setText(getOption2("Spanish", "4B"));
-                        Location.setText(getLocationText("Spanish", "4B"));
+                        O1.setText(getOption1("4B"));
+                        Body.setText(getMainOutput("4B"));
+                        O2.setText(getOption2("4B"));
+                        Location.setText(getLocationText("4B"));
                         phaseKey = "4B";
                         break;
                     case "4A":
-                        O1.setText(getOption1("Spanish", "5A"));
-                        Body.setText(getMainOutput("Spanish", "5A"));
-                        O2.setText(getOption2("Spanish", "5A"));
-                        Location.setText(getLocationText("Spanish", "5A"));
+                        O1.setText(getOption1("5A"));
+                        Body.setText(getMainOutput("5A"));
+                        O2.setText(getOption2("5A"));
+                        Location.setText(getLocationText("5A"));
                         phaseKey = "5A";
                         break;
                     case "2B":
-                        O1.setText(getOption1("Spanish", "3C"));
-                        Body.setText(getMainOutput("Spanish", "3C"));
-                        O2.setText(getOption2("Spanish", "3C"));
-                        Location.setText(getLocationText("Spanish", "3C"));
+                        O1.setText(getOption1("3C"));
+                        Body.setText(getMainOutput("3C"));
+                        O2.setText(getOption2("3C"));
+                        Location.setText(getLocationText("3C"));
                         phaseKey = "3C";
                         break;
                     case "3C":
-                        O1.setText(getOption1("Spanish", "4D"));
-                        Body.setText(getMainOutput("Spanish", "4D"));
-                        O2.setText(getOption2("Spanish", "4D"));
-                        Location.setText(getLocationText("Spanish", "4D"));
+                        O1.setText(getOption1("4D"));
+                        Body.setText(getMainOutput("4D"));
+                        O2.setText(getOption2("4D"));
+                        Location.setText(getLocationText("4D"));
                         phaseKey = "4D";
                         break;
                     default:
@@ -141,7 +141,7 @@ public class Story {
         frame.setVisible(true);
     }
 
-    private static String getLocationText(String language, String phaseKey) {
+    private static String getLocationText(String phaseKey) {
         if (phaseKey == "3D"|| phaseKey == "4B" || phaseKey == "4E" || phaseKey == "5B" || phaseKey == "5F" || phaseKey == "3F" || phaseKey == "5J" || phaseKey == "5M" || phaseKey == "4H") {
             return gameOverFrame("Spanish");
         } else {
@@ -200,7 +200,7 @@ public class Story {
         }
     }
 
-    private static String getOption1(String language, String phaseKey) {
+    private static String getOption1(String phaseKey) {
         switch (phaseKey) {
             case "0":
                 return "<HTML>Pasas el puente y entras.</HTML>";
@@ -237,7 +237,7 @@ public class Story {
         }
     }
     
-    private static String getOption2(String language, String phaseKey) {
+    private static String getOption2(String phaseKey) {
         switch (phaseKey) {
             case "0":
                 return "<HTML>Lo ignoras y vuelves a casa.</HTML>";
@@ -272,7 +272,7 @@ public class Story {
         }
     }
 
-    private static String getMainOutput(String language, String phaseKey) {
+    private static String getMainOutput(String phaseKey) {
         switch (phaseKey) {
             case "0":
                 return "<HTML>Acabas de salir de la Academia Kádic y vas de camino a casa pero hoy decides ir a pasear por el bosque y cruzar a ver esa fábrica en la Isla Seguine. El puente aunque esté un poco dañado aún se puede transitar. Parece que uno de los portones de la fábrica abandonada está casi abierta. ¿Qué harás?</HTML>";
@@ -372,7 +372,7 @@ public class Story {
         return "";
     }
    
-    private static String errorScreen(String language, String errorText) {
+    private static String errorScreen(String errorText) {
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
@@ -423,6 +423,6 @@ public class Story {
     }
     
     public static void main(String[] args) {
-        errorScreen("Spanish","Error code: 423");
+        errorScreen("Error code: 423");
     }
 }
