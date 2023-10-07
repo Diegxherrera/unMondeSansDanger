@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 public class Story {
+    
     public static int storyPhase = 0;
     public static String[] phasesDone;
     public static String phaseKey = "0";
@@ -118,6 +119,38 @@ public class Story {
                         Location.setText(getLocationText("4D"));
                         phaseKey = "4D";
                         break;
+                    case "4C":
+                        O1.setText(getOption1("5C"));
+                        Body.setText(getMainOutput("5C"));
+                        O2.setText(getOption2("5C"));
+                        Location.setText(getLocationText("5C"));
+                        phaseKey = "5C";
+                        break;
+                    case "2C":
+                        O1.setText(getOption1("3E"));
+                        Body.setText(getMainOutput("3E"));
+                        O2.setText(getOption2("3E"));
+                        Location.setText(getLocationText("3E"));
+                        phaseKey = "3E";
+                        break;
+                    case "3E":
+                        O1.setText(getOption1("4F"));
+                        Body.setText(getMainOutput("4F"));
+                        O2.setText(getOption2("4F"));
+                        Location.setText(getLocationText("4F"));
+                        phaseKey = "4F";
+                        break;
+                    case "4F":
+                        gameOverFrame();
+                        phaseKey = "5J";
+                        break;
+                    case "4G":
+                        O1.setText(getOption1("5L"));
+                        Body.setText(getMainOutput("5L"));
+                        O2.setText(getOption2("5L"));
+                        Location.setText(getLocationText("5L"));
+                        phaseKey = "5L";
+                        break;
                     default:
                         break;
                 }
@@ -126,7 +159,90 @@ public class Story {
 
         O2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                switch (phaseKey) {
+                    case "0":
+                        O1.setText(getOption1("1B"));
+                        Body.setText(getMainOutput("1B"));
+                        O2.setText(getOption2("1B"));
+                        Location.setText(getLocationText("1B"));
+                        phaseKey = "1B";
+                        break;
+                    case "1A":
+                        O1.setText(getOption1("2B"));
+                        Body.setText(getMainOutput("2B"));
+                        O2.setText(getOption2("2B"));
+                        Location.setText(getLocationText("2B"));
+                        phaseKey = "2B";
+                        break;
+                    case "1B":
+                        O1.setText(getOption1("2D"));
+                        Body.setText(getMainOutput("2D"));
+                        O2.setText(getOption2("2D"));
+                        Location.setText(getLocationText("2D"));
+                        phaseKey = "2D";
+                        break;
+                    case "2A":
+                        O1.setText(getOption1("3B"));
+                        Body.setText(getMainOutput("3B"));
+                        O2.setText(getOption2("3B"));
+                        Location.setText(getLocationText("3B"));
+                        phaseKey = "3B";
+                        break;
+                    case "3A":
+                        gameOverFrame();
+                        phaseKey = "4B";
+                        break;
+                    case "3B":
+                        gameOverFrame();
+                        phaseKey = "4B";
+                        break;
+                    case "4A":
+                        gameOverFrame();
+                        phaseKey = "5B";
+                        break;
+                    case "2B":
+                        gameOverFrame();
+                        phaseKey = "3D";
+                        break;
+                    case "3C":
+                        gameOverFrame();
+                        phaseKey = "4E";
+                        break;
+                    case "4D":
+                        gameOverFrame();
+                        phaseKey = "5F";
+                        break;
+                    case "4C":
+                        O1.setText(getOption1("5D"));
+                        Body.setText(getMainOutput("5D"));
+                        O2.setText(getOption2("5D"));
+                        Location.setText(getLocationText("5D"));
+                        phaseKey = "5D";
+                        break;
+                    case "2C":
+                        gameOverFrame();
+                        phaseKey = "3F";
+                    case "3E":
+                        O1.setText(getOption1("4G"));
+                        Body.setText(getMainOutput("4G"));
+                        O2.setText(getOption2("4G"));
+                        Location.setText(getLocationText("4G"));
+                        phaseKey = "4G";
+                        break;
+                    case "4G":
+                        gameOverFrame();
+                        phaseKey = "5M";
+                        break;
+                    case "4F":
+                        O1.setText(getOption1("5K"));
+                        Body.setText(getMainOutput("5K"));
+                        O2.setText(getOption2("5K"));
+                        Location.setText(getLocationText("5K"));
+                        phaseKey = "5K";
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
@@ -142,8 +258,8 @@ public class Story {
     }
 
     private static String getLocationText(String phaseKey) {
-        if (phaseKey == "3D"|| phaseKey == "4B" || phaseKey == "4E" || phaseKey == "5B" || phaseKey == "5F" || phaseKey == "3F" || phaseKey == "5J" || phaseKey == "5M" || phaseKey == "4H") {
-            return gameOverFrame("Spanish");
+        if (phaseKey.equals("3D") || phaseKey.equals("4B") || phaseKey.equals("4E") || phaseKey.equals("5B") || phaseKey.equals("5F") || phaseKey.equals("3F") || phaseKey.equals("5J") || phaseKey.equals("5M") || phaseKey.equals("4H")) {
+            return gameOverFrame();
         } else {
             switch (phaseKey) {
                 case "0":
@@ -167,7 +283,7 @@ public class Story {
                 case "3C":
                     return "Bosque Kádic";
                 case "3D":
-                    return "getLocationText() failed to assign the phase. This phase is a GAME OVER.";
+                    return "getLocationText() failed when receiving current phase. This phase is a GAME OVER.";
                 case "3E":
                     return "Boulogne-Billancourt, Francia";
                 case "3F":
@@ -312,7 +428,7 @@ public class Story {
 
     }
 
-    private static String gameOverFrame(String language) {
+    private static String gameOverFrame() {
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
