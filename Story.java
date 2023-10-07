@@ -6,14 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 public class Story {
-    
     public static int storyPhase = 0;
     public static String[] phasesDone;
     public static String phaseKey = "0";
 
-    public static void openStoryFrame(String language) {
-
-        // Frame declaration
+    public static void createJFrame(int width, int height) {
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
@@ -39,7 +36,16 @@ public class Story {
         // Set the gradient panel as the content pane of the frame
         frame.setContentPane(gradientPanel);
 
+        gradientPanel.setLayout(new BorderLayout());
+        gradientPanel.add(Panel, BorderLayout.SOUTH);
+        gradientPanel.add(Location, BorderLayout.NORTH);
+        gradientPanel.add(Body, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
+
+    public static void openStoryFrame(String language) {
         // Location + Body + Panel
+        createJFrame(600, 400);
         JLabel Location = new JLabel(getLocationText(phaseKey), SwingConstants.LEFT);
         System.out.println(phaseKey);
         Location.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -159,160 +165,157 @@ public class Story {
 
         O2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switch (phaseKey) {
-                    case "0":
-                        O1.setText(getOption1("1B"));
-                        Body.setText(getMainOutput("1B"));
-                        O2.setText(getOption2("1B"));
-                        Location.setText(getLocationText("1B"));
-                        phaseKey = "1B";
-                        break;
-                    case "1A":
-                        O1.setText(getOption1("2B"));
-                        Body.setText(getMainOutput("2B"));
-                        O2.setText(getOption2("2B"));
-                        Location.setText(getLocationText("2B"));
-                        phaseKey = "2B";
-                        break;
-                    case "1B":
-                        O1.setText(getOption1("2D"));
-                        Body.setText(getMainOutput("2D"));
-                        O2.setText(getOption2("2D"));
-                        Location.setText(getLocationText("2D"));
-                        phaseKey = "2D";
-                        break;
-                    case "2A":
-                        O1.setText(getOption1("3B"));
-                        Body.setText(getMainOutput("3B"));
-                        O2.setText(getOption2("3B"));
-                        Location.setText(getLocationText("3B"));
-                        phaseKey = "3B";
-                        break;
-                    case "3A":
-                        gameOverFrame();
-                        phaseKey = "4B";
-                        break;
-                    case "3B":
-                        gameOverFrame();
-                        phaseKey = "4B";
-                        break;
-                    case "4A":
-                        gameOverFrame();
-                        phaseKey = "5B";
-                        break;
-                    case "2B":
-                        gameOverFrame();
-                        phaseKey = "3D";
-                        break;
-                    case "3C":
-                        gameOverFrame();
-                        phaseKey = "4E";
-                        break;
-                    case "4D":
-                        gameOverFrame();
-                        phaseKey = "5F";
-                        break;
-                    case "4C":
-                        O1.setText(getOption1("5D"));
-                        Body.setText(getMainOutput("5D"));
-                        O2.setText(getOption2("5D"));
-                        Location.setText(getLocationText("5D"));
-                        phaseKey = "5D";
-                        break;
-                    case "2C":
-                        gameOverFrame();
-                        phaseKey = "3F";
-                    case "3E":
-                        O1.setText(getOption1("4G"));
-                        Body.setText(getMainOutput("4G"));
-                        O2.setText(getOption2("4G"));
-                        Location.setText(getLocationText("4G"));
-                        phaseKey = "4G";
-                        break;
-                    case "4G":
-                        gameOverFrame();
-                        phaseKey = "5M";
-                        break;
-                    case "4F":
-                        O1.setText(getOption1("5K"));
-                        Body.setText(getMainOutput("5K"));
-                        O2.setText(getOption2("5K"));
-                        Location.setText(getLocationText("5K"));
-                        phaseKey = "5K";
-                        break;
-                    default:
-                        break;
+                if (phaseKey.equals("3D") || phaseKey.equals("4B") || phaseKey.equals("4E") || phaseKey.equals("5B")
+                        || phaseKey.equals("5F") || phaseKey.equals("3F") || phaseKey.equals("5J")
+                        || phaseKey.equals("5M") || phaseKey.equals("4H")) {
+                    frame.dispose();
+                    gameOverFrame();
+                } else {
+                    switch (phaseKey) {
+                        case "0":
+                            O1.setText(getOption1("1B"));
+                            Body.setText(getMainOutput("1B"));
+                            O2.setText(getOption2("1B"));
+                            Location.setText(getLocationText("1B"));
+                            phaseKey = "1B";
+                            break;
+                        case "1A":
+                            O1.setText(getOption1("2B"));
+                            Body.setText(getMainOutput("2B"));
+                            O2.setText(getOption2("2B"));
+                            Location.setText(getLocationText("2B"));
+                            phaseKey = "2B";
+                            break;
+                        case "1B":
+                            O1.setText(getOption1("2D"));
+                            Body.setText(getMainOutput("2D"));
+                            O2.setText(getOption2("2D"));
+                            Location.setText(getLocationText("2D"));
+                            phaseKey = "2D";
+                            break;
+                        case "2A":
+                            O1.setText(getOption1("3B"));
+                            Body.setText(getMainOutput("3B"));
+                            O2.setText(getOption2("3B"));
+                            Location.setText(getLocationText("3B"));
+                            phaseKey = "3B";
+                            break;
+                        case "3A":
+                            gameOverFrame();
+                            phaseKey = "4B";
+                            break;
+                        case "3B":
+                            gameOverFrame();
+                            phaseKey = "4B";
+                            break;
+                        case "4A":
+                            gameOverFrame();
+                            phaseKey = "5B";
+                            break;
+                        case "2B":
+                            gameOverFrame();
+                            phaseKey = "3D";
+                            break;
+                        case "3C":
+                            gameOverFrame();
+                            phaseKey = "4E";
+                            break;
+                        case "4D":
+                            gameOverFrame();
+                            phaseKey = "5F";
+                            break;
+                        case "4C":
+                            O1.setText(getOption1("5D"));
+                            Body.setText(getMainOutput("5D"));
+                            O2.setText(getOption2("5D"));
+                            Location.setText(getLocationText("5D"));
+                            phaseKey = "5D";
+                            break;
+                        case "2C":
+                            gameOverFrame();
+                            phaseKey = "3F";
+                        case "3E":
+                            O1.setText(getOption1("4G"));
+                            Body.setText(getMainOutput("4G"));
+                            O2.setText(getOption2("4G"));
+                            Location.setText(getLocationText("4G"));
+                            phaseKey = "4G";
+                            break;
+                        case "4G":
+                            gameOverFrame();
+                            phaseKey = "5M";
+                            break;
+                        case "4F":
+                            O1.setText(getOption1("5K"));
+                            Body.setText(getMainOutput("5K"));
+                            O2.setText(getOption2("5K"));
+                            Location.setText(getLocationText("5K"));
+                            phaseKey = "5K";
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
             }
         });
 
         Panel.add(O1);
         Panel.add(O2);
-
-        gradientPanel.setLayout(new BorderLayout());
-        gradientPanel.add(Panel, BorderLayout.SOUTH);
-        gradientPanel.add(Location, BorderLayout.NORTH);
-        gradientPanel.add(Body, BorderLayout.CENTER);
-
-        frame.setVisible(true);
     }
-
+    
     private static String getLocationText(String phaseKey) {
-        if (phaseKey.equals("3D") || phaseKey.equals("4B") || phaseKey.equals("4E") || phaseKey.equals("5B") || phaseKey.equals("5F") || phaseKey.equals("3F") || phaseKey.equals("5J") || phaseKey.equals("5M") || phaseKey.equals("4H")) {
-            return gameOverFrame();
-        } else {
-            switch (phaseKey) {
-                case "0":
-                    return "Boulogne-Billancourt, Francia";
-                case "1A":
-                    return "Fábrica abandonada, Isla Seguin";
-                case "1B":
-                    return "Academia Kádic";
-                case "2A":
-                    return "Fábrica abandonada, Isla Seguin";
-                case "2B":
-                    return "Academia Kádic";
-                case "2C":
-                    return "Academia Kádic";
-                case "2D":
-                    return "Fábrica abandonada, Isla Seguin";
-                case "3A":
-                    return "Piso -1, Fábrica abandonada";
-                case "3B":
-                    return "Piso -2, Fábrica abandonada";
-                case "3C":
-                    return "Bosque Kádic";
-                case "3D":
-                    return "getLocationText() failed when receiving current phase. This phase is a GAME OVER.";
-                case "3E":
-                    return "Boulogne-Billancourt, Francia";
-                case "3F":
-                    return "Boulogne-Billancourt, Francia";
-                case "3H":
-                    return "Boulogne-Billancourt, Francia";
-                case "4A":
-                    return "Boulogne-Billancourt, Francia";
-                case "4B":
-                    return "Boulogne-Billancourt, Francia";
-                case "4C":
-                    return "Boulogne-Billancourt, Francia";
-                case "4D":
-                    return "Boulogne-Billancourt, Francia";
-                case "4E":
-                    return "Boulogne-Billancourt, Francia";
-                case "4F":
-                    return "Boulogne-Billancourt, Francia";
-                case "4G":
-                    return "Boulogne-Billancourt, Francia";
-                case "4H":
-                    return "Boulogne-Billancourt, Francia";
-                case "5A":
-                    return "Boulogne-Billancourt, Francia";
-                case "5B":
-                    return "Boulogne-Billancourt, Francia";
-                default:
-                    return "LocationText failed.";
-        }
+        switch (phaseKey) {
+            case "0":
+                return "Boulogne-Billancourt, Francia";
+            case "1A":
+                return "Fábrica abandonada, Isla Seguin";
+            case "1B":
+                return "Academia Kádic";
+            case "2A":
+                return "Fábrica abandonada, Isla Seguin";
+            case "2B":
+                return "Academia Kádic";
+            case "2C":
+                return "Academia Kádic";
+            case "2D":
+                return "Fábrica abandonada, Isla Seguin";
+            case "3A":
+                return "Piso -1, Fábrica abandonada";
+            case "3B":
+                return "Piso -2, Fábrica abandonada";
+            case "3C":
+                return "Bosque Kádic";
+            case "3D":
+                return "getLocationText() failed when receiving current phase. This phase is a GAME OVER.";
+            case "3E":
+                return "Boulogne-Billancourt, Francia";
+            case "3F":
+                return "Boulogne-Billancourt, Francia";
+            case "3H":
+                return "Boulogne-Billancourt, Francia";
+            case "4A":
+                return "Boulogne-Billancourt, Francia";
+            case "4B":
+                return "Boulogne-Billancourt, Francia";
+            case "4C":
+                return "Boulogne-Billancourt, Francia";
+            case "4D":
+                return "Boulogne-Billancourt, Francia";
+            case "4E":
+                return "Boulogne-Billancourt, Francia";
+            case "4F":
+                return "Boulogne-Billancourt, Francia";
+            case "4G":
+                return "Boulogne-Billancourt, Francia";
+            case "4H":
+                return "Boulogne-Billancourt, Francia";
+            case "5A":
+                return "Boulogne-Billancourt, Francia";
+            case "5B":
+                return "Boulogne-Billancourt, Francia";
+            default:
+                return "LocationText failed.";
         }
     }
 
@@ -323,13 +326,13 @@ public class Story {
             case "1A":
                 return "<HTML>Te acercas al ascensor a investigarlo.</HTML>";
             case "1B":
-                return "<HTML>Sigues visitando el sitio web en busca de más archivos de vídeo.</HTML>";
+                return "<HTML>Buscas más sobre el archivo.</HTML>";
             case "2A":
                 return "<HTML>Buscas la manera de encenderlo.</HTML>";
             case "2B":
                 return "<HTML>Le crees y vas al bosque a verlas.</HTML>";
             case "2C":
-                return "<HTML>Buscar a tus amigos Ulrich, Yumi y Odd para hacerles ver el archivo de vídeos.</HTML>";
+                return "<HTML>Haces ver los vídeos a los chicos.</HTML>";
             case "2D":
                 return "<HTML>Continuar.</HTML>";
             case "3A":
@@ -341,18 +344,20 @@ public class Story {
             case "3D":
                 return "<HTML>Volver al menú.</HTML>";
             case "3E":
-                return "<HTML>XXXXX</HTML>";
+                return "<HTML>Ayudar a Ulrich</HTML>";
             case "3F":
                 return "<HTML>Volver al menú.</HTML>";
             case "3H":
                 return "<HTML>Continuar.</HTML>";
             case "4A":
                 return "<HTML>Volver al menú.</HTML>";
+            case "4B":
+                return "<HTML>Volver al menú</HTML>";
             default:
                 return "<HTML>Option.</HTML>";
         }
     }
-    
+
     private static String getOption2(String phaseKey) {
         switch (phaseKey) {
             case "0":
@@ -387,7 +392,7 @@ public class Story {
                 return "LocationText failed.";
         }
     }
-
+    
     private static String getMainOutput(String phaseKey) {
         switch (phaseKey) {
             case "0":
@@ -455,7 +460,9 @@ public class Story {
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
         MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 30));
 
-        JLabel Body = new JLabel("<HTML><center>Lo podrías haber hecho mejor, has elegido una serie de decisiones erróneas que te han llevado a tu situación actual.</center></HTML>", SwingConstants.CENTER);
+        JLabel Body = new JLabel(
+                "<HTML><center>Lo podrías haber hecho mejor, has elegido una serie de decisiones erróneas que te han llevado a tu situación actual.</center></HTML>",
+                SwingConstants.CENTER);
         Body.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         Body.setBorder(new EmptyBorder(0, 20, 20, 20));
 
@@ -487,58 +494,59 @@ public class Story {
         frame.setVisible(true);
         return "";
     }
-   
-    private static String errorScreen(String errorText) {
-        JFrame frame = new JFrame("Conversational Game | DHR");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    
-        // Change the background color to a whiter red
-        JPanel redPanel = new JPanel();
-        redPanel.setBackground(new Color(255, 200, 200)); // A whiter shade of red
-    
-        JLabel MainTitle = new JLabel("Error", SwingConstants.CENTER);
-        MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
-        MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 30));
-    
-        JLabel Body = new JLabel(errorText, SwingConstants.CENTER);
-        Body.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        Body.setBorder(new EmptyBorder(0, 20, 20, 20));
-    
-        JPanel Panel = new JPanel();
-        Panel.setBackground(new Color(255, 200, 200));
-        JButton O1 = new JButton("Return to the menu");
-        O1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                Languages.main();
-            }
-        });
-        JButton O2 = new JButton("Exit the game");
-        O2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                System.exit(0);
-            }
-        });
-    
-        Panel.add(O1);
-        Panel.add(O2);
-    
-        redPanel.setLayout(new BorderLayout());
-        redPanel.add(MainTitle, BorderLayout.NORTH);
-        redPanel.add(Body, BorderLayout.CENTER);
-        redPanel.add(Panel, BorderLayout.SOUTH);
-    
-        frame.setContentPane(redPanel);
-        frame.setVisible(true);
-        return "";
-    }
-    
+
+    /*
+     * private static String errorScreen(String errorText) {
+     * JFrame frame = new JFrame("Conversational Game | DHR");
+     * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     * frame.setSize(600, 400);
+     * frame.setResizable(false);
+     * frame.setLocationRelativeTo(null);
+     * frame.setVisible(true);
+     * 
+     * // Change the background color to a whiter red
+     * JPanel redPanel = new JPanel();
+     * redPanel.setBackground(new Color(255, 200, 200)); // A whiter shade of red
+     * 
+     * JLabel MainTitle = new JLabel("Error", SwingConstants.CENTER);
+     * MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
+     * MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 30));
+     * 
+     * JLabel Body = new JLabel(errorText, SwingConstants.CENTER);
+     * Body.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+     * Body.setBorder(new EmptyBorder(0, 20, 20, 20));
+     * 
+     * JPanel Panel = new JPanel();
+     * Panel.setBackground(new Color(255, 200, 200));
+     * JButton O1 = new JButton("Return to the menu");
+     * O1.addActionListener(new ActionListener() {
+     * public void actionPerformed(ActionEvent e) {
+     * frame.dispose();
+     * Languages.main();
+     * }
+     * });
+     * JButton O2 = new JButton("Exit the game");
+     * O2.addActionListener(new ActionListener() {
+     * public void actionPerformed(ActionEvent e) {
+     * frame.dispose();
+     * System.exit(0);
+     * }
+     * });
+     * 
+     * Panel.add(O1);
+     * Panel.add(O2);
+     * 
+     * redPanel.setLayout(new BorderLayout());
+     * redPanel.add(MainTitle, BorderLayout.NORTH);
+     * redPanel.add(Body, BorderLayout.CENTER);
+     * redPanel.add(Panel, BorderLayout.SOUTH);
+     * 
+     * frame.setContentPane(redPanel);
+     * frame.setVisible(true);
+     * return "";
+     * }
+     */
     public static void main(String[] args) {
-        errorScreen("Error code: 423");
+        openStoryFrame("Spanish");
     }
 }
