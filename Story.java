@@ -1,7 +1,5 @@
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +8,9 @@ import java.awt.geom.Rectangle2D;
 public class Story {
     public static int storyPhase = 0;
     public static String[] phasesDone;
+    public static String phaseKey = "0";
 
     public static void openStoryFrame(String language) {
-        String phaseKey = "0";
 
         // Frame declaration
         JFrame frame = new JFrame("Conversational Game | DHR");
@@ -56,17 +54,73 @@ public class Story {
 
         O1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                storyPhase = storyPhase++;
-                if (phaseKey == "0") {
-                    getOption1("Spanish", "1A");
-                    getMainOutput("Spanish", "1A");
-                    getOption2("Spanish", "1A");
-                    getLocationText("Spanish", "1A");
-                } else if (phaseKey == "") {
-
+                switch (phaseKey) {
+                    case "0":
+                        O1.setText(getOption1("Spanish", "1A"));
+                        Body.setText(getMainOutput("Spanish", "1A"));
+                        O2.setText(getOption2("Spanish", "1A"));
+                        Location.setText(getLocationText("Spanish", "1A"));
+                        phaseKey = "1A";
+                        break;
+                    case "1A":
+                        O1.setText(getOption1("Spanish", "2A"));
+                        Body.setText(getMainOutput("Spanish", "2A"));
+                        O2.setText(getOption2("Spanish", "2A"));
+                        Location.setText(getLocationText("Spanish", "2A"));
+                        phaseKey = "2A";
+                        break;
+                    case "1B":
+                        O1.setText(getOption1("Spanish", "2C"));
+                        Body.setText(getMainOutput("Spanish", "2C"));
+                        O2.setText(getOption2("Spanish", "2C"));
+                        Location.setText(getLocationText("Spanish", "2C"));
+                        phaseKey = "2C";
+                        break;
+                    case "2A":
+                        O1.setText(getOption1("Spanish", "3A"));
+                        Body.setText(getMainOutput("Spanish", "3A"));
+                        O2.setText(getOption2("Spanish", "3A"));
+                        Location.setText(getLocationText("Spanish", "3A"));
+                        phaseKey = "3A";
+                        break;
+                    case "3A":
+                        O1.setText(getOption1("Spanish", "4A"));
+                        Body.setText(getMainOutput("Spanish", "4A"));
+                        O2.setText(getOption2("Spanish", "4A"));
+                        Location.setText(getLocationText("Spanish", "4A"));
+                        phaseKey = "4A";
+                        break;
+                    case "3B":
+                        O1.setText(getOption1("Spanish", "4B"));
+                        Body.setText(getMainOutput("Spanish", "4B"));
+                        O2.setText(getOption2("Spanish", "4B"));
+                        Location.setText(getLocationText("Spanish", "4B"));
+                        phaseKey = "4B";
+                        break;
+                    case "4A":
+                        O1.setText(getOption1("Spanish", "5A"));
+                        Body.setText(getMainOutput("Spanish", "5A"));
+                        O2.setText(getOption2("Spanish", "5A"));
+                        Location.setText(getLocationText("Spanish", "5A"));
+                        phaseKey = "5A";
+                        break;
+                    case "2B":
+                        O1.setText(getOption1("Spanish", "3C"));
+                        Body.setText(getMainOutput("Spanish", "3C"));
+                        O2.setText(getOption2("Spanish", "3C"));
+                        Location.setText(getLocationText("Spanish", "3C"));
+                        phaseKey = "3C";
+                        break;
+                    case "3C":
+                        O1.setText(getOption1("Spanish", "4D"));
+                        Body.setText(getMainOutput("Spanish", "4D"));
+                        O2.setText(getOption2("Spanish", "4D"));
+                        Location.setText(getLocationText("Spanish", "4D"));
+                        phaseKey = "4D";
+                        break;
+                    default:
+                        break;
                 }
-
-                phasesDone[storyPhase] = storyPhase + "A";
             }
         });
 
@@ -88,164 +142,174 @@ public class Story {
     }
 
     private static String getLocationText(String language, String phaseKey) {
-        switch (phaseKey) {
-            case "0":
-                return "Boulogne-Billancourt, Francia";
-            case "1A":
-                return "Boulogne-Billancourt, Francia";
-            case "1B":
-                return "Boulogne-Billancourt, Francia";
-            case "2A":
-                return "Boulogne-Billancourt, Francia";
-            case "2B":
-                return "Boulogne-Billancourt, Francia";
-            case "2C":
-                return "Boulogne-Billancourt, Francia";
-            case "2D":
-                return "Boulogne-Billancourt, Francia";
-            case "3A":
-                return "Boulogne-Billancourt, Francia";
-            case "3B":
-                return "Boulogne-Billancourt, Francia";
-            case "3C":
-                return "Boulogne-Billancourt, Francia";
-            case "3D":
-                return "Boulogne-Billancourt, Francia";
-            case "3E":
-                return "Boulogne-Billancourt, Francia";
-            case "3F":
-                return "Boulogne-Billancourt, Francia";
-            case "3H":
-                return "Boulogne-Billancourt, Francia";
-            case "4A":
-                return "Boulogne-Billancourt, Francia";
-            case "4B":
-                return "Boulogne-Billancourt, Francia";
-            case "4C":
-                return "Boulogne-Billancourt, Francia";
-            case "4D":
-                return "Boulogne-Billancourt, Francia";
-            case "4E":
-                return "Boulogne-Billancourt, Francia";
-            case "4F":
-                return "Boulogne-Billancourt, Francia";
-            case "4G":
-                return "Boulogne-Billancourt, Francia";
-            case "4H":
-                return "Boulogne-Billancourt, Francia";
-            case "5A":
-                return "Boulogne-Billancourt, Francia";
-            case "5B":
-                return "Boulogne-Billancourt, Francia";
-            default:
-                return "LocationText failed.";
+        if (phaseKey == "3D"|| phaseKey == "4B" || phaseKey == "4E" || phaseKey == "5B" || phaseKey == "5F" || phaseKey == "3F" || phaseKey == "5J" || phaseKey == "5M" || phaseKey == "4H") {
+            return gameOverFrame("Spanish");
+        } else {
+            switch (phaseKey) {
+                case "0":
+                    return "Boulogne-Billancourt, Francia";
+                case "1A":
+                    return "Fábrica abandonada, Isla Seguin";
+                case "1B":
+                    return "Academia Kádic";
+                case "2A":
+                    return "Fábrica abandonada, Isla Seguin";
+                case "2B":
+                    return "Academia Kádic";
+                case "2C":
+                    return "Academia Kádic";
+                case "2D":
+                    return "Fábrica abandonada, Isla Seguin";
+                case "3A":
+                    return "Piso -1, Fábrica abandonada";
+                case "3B":
+                    return "Piso -2, Fábrica abandonada";
+                case "3C":
+                    return "Bosque Kádic";
+                case "3D":
+                    return "getLocationText() failed to assign the phase. This phase is a GAME OVER.";
+                case "3E":
+                    return "Boulogne-Billancourt, Francia";
+                case "3F":
+                    return "Boulogne-Billancourt, Francia";
+                case "3H":
+                    return "Boulogne-Billancourt, Francia";
+                case "4A":
+                    return "Boulogne-Billancourt, Francia";
+                case "4B":
+                    return "Boulogne-Billancourt, Francia";
+                case "4C":
+                    return "Boulogne-Billancourt, Francia";
+                case "4D":
+                    return "Boulogne-Billancourt, Francia";
+                case "4E":
+                    return "Boulogne-Billancourt, Francia";
+                case "4F":
+                    return "Boulogne-Billancourt, Francia";
+                case "4G":
+                    return "Boulogne-Billancourt, Francia";
+                case "4H":
+                    return "Boulogne-Billancourt, Francia";
+                case "5A":
+                    return "Boulogne-Billancourt, Francia";
+                case "5B":
+                    return "Boulogne-Billancourt, Francia";
+                default:
+                    return "LocationText failed.";
+        }
         }
     }
 
     private static String getOption1(String language, String phaseKey) {
         switch (phaseKey) {
             case "0":
-                return "Pasas el puente y entras.";
+                return "<HTML>Pasas el puente y entras.</HTML>";
             case "1A":
-                return "Te acercas al ascensor a investigarlo.";
+                return "<HTML>Te acercas al ascensor a investigarlo.</HTML>";
             case "1B":
-                return "Sigues visitando el sitio web en busca de más archivos de vídeo.";
+                return "<HTML>Sigues visitando el sitio web en busca de más archivos de vídeo.</HTML>";
             case "2A":
-                return "Buscas la manera de encenderlo.";
+                return "<HTML>Buscas la manera de encenderlo.</HTML>";
             case "2B":
-                return "Le crees y vas al bosque a verlas.";
+                return "<HTML>Le crees y vas al bosque a verlas.</HTML>";
             case "2C":
-                return "Buscar a tus amigos Ulrich, Yumi y Odd para hacerles ver el archivo de vídeos.";
+                return "<HTML>Buscar a tus amigos Ulrich, Yumi y Odd para hacerles ver el archivo de vídeos.</HTML>";
             case "2D":
-                return "Continuar.";
+                return "<HTML>Continuar.</HTML>";
             case "3A":
-                return "Encender el interruptor.";
+                return "<HTML>Encender el interruptor.</HTML>";
             case "3B":
-                return "Encender el interruptor.";
+                return "<HTML>Encender el interruptor.</HTML>";
             case "3C":
-                return "Visitar el Piso -1.";
+                return "<HTML>Visitar el Piso -1.</HTML>";
             case "3D":
-                return "Volver al menú.";
+                return "<HTML>Volver al menú.</HTML>";
             case "3E":
-                return "XXXXX";
+                return "<HTML>XXXXX</HTML>";
             case "3F":
-                return "Volver al menú.";
+                return "<HTML>Volver al menú.</HTML>";
             case "3H":
-                return "Continuar.";
+                return "<HTML>Continuar.</HTML>";
             case "4A":
-                return "Volver al menú.";
-            case "4B":
-                return "Boulogne-Billancourt, Francia";
-            case "4C":
-                return "Boulogne-Billancourt, Francia";
-            case "4D":
-                return "Boulogne-Billancourt, Francia";
-            case "4E":
-                return "Boulogne-Billancourt, Francia";
-            case "4F":
-                return "Boulogne-Billancourt, Francia";
-            case "4G":
-                return "Boulogne-Billancourt, Francia";
-            case "4H":
-                return "Volver al menú.";
-            case "5B":
-                return "Boulogne-Billancourt, Francia";
+                return "<HTML>Volver al menú.</HTML>";
             default:
-                return "LocationText failed.";
+                return "<HTML>Option.</HTML>";
         }
     }
     
     private static String getOption2(String language, String phaseKey) {
         switch (phaseKey) {
             case "0":
-                return "Lo ignoras y vuelves a casa.";
+                return "<HTML>Lo ignoras y vuelves a casa.</HTML>";
             case "1A":
-                return "Decides salir de la fábrica.";
+                return "<HTML>Decides salir de la fábrica.";
             case "1B":
-                return "Vas directamente a la fábrica en búsqueda de la sala de los vídeos.";
+                return "<HTML>Vas directamente a la fábrica en búsqueda de la sala de los vídeos.</HTML>";
             case "2A":
-                return "Visitas la sala y vas a otro piso.";
+                return "<HTML>Visitas la sala y vas a otro piso.</HTML>";
             case "2B":
-                return "Le ignoras y le dices que es normal.";
+                return "<HTML>Le ignoras y le dices que es normal.</HTML>";
             case "2C":
-                return "Ir a la fábrica en búsqueda de respuestas.";
+                return "<HTML>Ir a la fábrica en búsqueda de respuestas.</HTML>";
             case "3A":
-                return "Decides andar encima del círculo que hay dibujado en el suelo.";
+                return "<HTML>Decides andar encima del círculo que hay dibujado en el suelo.</HTML>";
             case "3B":
-                return "Decides andar encima del círculo que hay dibujado en el suelo.";
+                return "<HTML>Decides andar encima del círculo que hay dibujado en el suelo.</HTML>";
             case "3C":
-                return "Visitar el Piso -2";
+                return "<HTML>Visitar el Piso -2</HTML>";
             case "3D":
-                return "Cerrar el juego.";
+                return "<HTML>Cerrar el juego.</HTML>";
             case "3E":
-                return "XXXXX";
+                return "<HTML>XXXXX</HTML>";
             case "3F":
-                return "Cerrar el juego.";
+                return "<HTML>Cerrar el juego.</HTML>";
             case "4A":
-                return "XXXXX";
+                return "<HTML>No hacer nada</HTML>";
             case "4B":
-                return "Cerrar el juego.";
-            case "4C":
-                return "Boulogne-Billancourt, Francia";
-            case "4D":
-                return "Boulogne-Billancourt, Francia";
-            case "4E":
-                return "Boulogne-Billancourt, Francia";
-            case "4F":
-                return "Boulogne-Billancourt, Francia";
-            case "4G":
-                return "Boulogne-Billancourt, Francia";
-            case "4H":
-                return "Volver al menú.";
-            case "5B":
-                return "Boulogne-Billancourt, Francia";
+                return "<HTML>Cerrar el juego.";
             default:
                 return "LocationText failed.";
         }
     }
 
     private static String getMainOutput(String language, String phaseKey) {
-        return "";
+        switch (phaseKey) {
+            case "0":
+                return "<HTML>Acabas de salir de la Academia Kádic y vas de camino a casa pero hoy decides ir a pasear por el bosque y cruzar a ver esa fábrica en la Isla Seguine. El puente aunque esté un poco dañado aún se puede transitar. Parece que uno de los portones de la fábrica abandonada está casi abierta. ¿Qué harás?</HTML>";
+            case "1A":
+                return "<HTML>Decides cruzar el puente hacia la Isla Seguine y te acercas a la fábrica abandonada. La puerta está entreabierta, y una sensación de intriga te impulsa a entrar. El interior de la fábrica está casi vacío y sólo hay un ascensor con pinta de estar anticuado. A medida que avanzas por aquel vasto espacio, escuchas un ruido que termina siendo un murciélago. ¿Qué harás ahora?</HTML>";
+            case "1B":
+                return "<HTML>Vuelves a casa y la intriga te sigue carcomiendo así que te interesas y comienzas a investigar en aquella fábrica que solía ser de Renault en los años 60 antes de su cierre en los 70 tras una fuerte crisis en la empresa. Aún sin encontrar nada ves que hay unos archivos en un blog con un estilo de hace unos 9/10 años, entras al blog y es un tipo de archivo de grabaciones en WMV. Es un diario de un señor explicando sus elocuencias y una historia un poco rara sobre un mundo virtual, al escucharlo piensas que estás loco pero sí que te das cuenta que las paredes son de la fábrica que fuiste a visitar con un tono más verdoso y claramente cuidadas.</HTML>";
+            case "2A":
+                return "<HTML>Al entrar huele a polvo pero ves que tienen botones aún funcionales, sólo hay 4 botones: Piso 0, Piso -1, Piso -2 y Piso -3. Vas a visitar el Piso -1 porque aunque parezca algún tipo de parking no hay salida de coches en toda la isla, el ascensor se cierra de una manera que nunca viste en un ascensor, al abrirse las puertas una sala iluminada de manera tenue te recibe con una silla y una especie de ordenador bastante grande. ¿Qué harás?</HTML>";
+            case "2B":
+                return "<HTML>Ese sentimiento te recorrió durante todo el camino y como aún no empezabas a dar clases te aburres pero prefieres estar en la Academia Kádic por tu propia seguridad. Tu amigo, Odd, te cuenta que ayer en el bosque Kádic encontró varias plantas y flores que en su presencia se tornaron negras. Tú no le crees, ya que, Odd suele tener bastantes fantasías y se inventa también muchas cosas. ¿Qué harás?</HTML>";
+            case "2C":
+                return "<HTML>Al seguir visitando la web descubres que el señor del video se llama Waldo Schaeffer, que es un investigador suizo que fue partícipe de un proyecto llamado Cartago, fue perseguido por gobiernos y tuvo que escapar a París después del secuestro de su mujer, después de todo esto inventó un programa de regreso al pasado porque su persecución llegaba a su fin, en detrimento de su hija, Aelita, eligió mandarla a ella a este mundo virtual llamado Lyoko, para salvarla de un secuestro y torturas en búsqueda de su padre. No entiendes nada de lo que ves, sólo sabes que parece demasiado desarrollado como para ser una invención. ¿Qué harás?</HTML>";
+            case "2D":
+                return "<HTML>Al llegar a la fábrica ves que hay unas flores negras junto a un árbol que en su base tiene raíces negras, te parece bastante extraño y continúas hacia la fábrica. Al llegar a la fábrica visitas las escaleras de la izquierda y te lleva a una sala de calderas que no parece en lo absoluto cuidada, tiene polvo y bastantes arañas, te dan miedo y por ello, sales cuanto antes. Antes de salir notas que te ha picado algo en el cuello, bajas a ver y con una mirada rápida ves una picadura, esto desencadena un ataque de ansiedad y comienzas a correr hacia la Academia en búsqueda de ayuda.</HTML>";
+            case "3A":
+                return "<HTML>El aspecto de este ordenador es como ningún otro que hayas visto, no tiene ningún botón de encendido, apagado o reseteo. Ves que justo detrás de este hay un tipo de proyector en el suelo de forma circular, al no conseguir encenderlo sigues visitando el resto de pisos en busca de respuestas. Al llegar al Piso -3 ves una sala bastante fría que cuenta con un botón en el centro, esta maquina parece algún tipo de maquinaria industrial. ¿Qué harás?</HTML>";
+            case "3B":
+                return "<HTML>Visitas el Piso -2 sin encontrar nada concluyente más que unas máquinas de unos 3 / 4 metros de altura con una forma cilíndrica con el interior iluminados en un blanco crema, no ves nada interesante y bajas otro piso. Al llegar al Piso -3 ves una sala bastante fría que cuenta con un botón en el centro, esta maquina parece algún tipo de maquinaria industrial. ¿Qué harás?</HTML>";
+            case "3C":
+                return "<HTML>Sigues a Odd al bosque y ves que algunas flores tienen unas esporas negras bastante extrañas, decidís no tocarlas porque desprenden un olor bastante particular, llamáis a Yumi y Ulrich para visitar todos juntos la fábrica como le dijiste a Odd. Al llegar a las puertas de la fábrica olía como a esas esporas y no os dio buena espina. Entráis y bajáis al ascensor que no fuiste capaz de visitar. Al entrar os dais cuenta de los 2 pisos disponibles. ¿Qué harás?</HTML>";
+            case "3D":
+                return "LINEA MUERTA";
+            case "3E":
+                return "XXXXX";
+            case "3F":
+                return "LINEA MUERTA";
+            case "3G":
+                return "<HTML>Al llegar a la Academia Kádic asistes a enfermería y te estás hinchando ligeramente, desconocías tu alergia a las arañas, así que, intentan reducir la reacción pero no lo consiguen así que llaman a la ambulancia para que te lleven al hospital. En tu camino sientes que no consigues respirar como antes, lo avisas y te asisten. Al llegar al hospital hay unos señores de negro que junto a los doctores te esperan. Te parece extraño pero decides descansar.</HTML>";
+            case "4A":
+                return "XXXX";
+            case "4B":
+                return "<HTML>Lastimosamente, no sabías que quizás esa cosa aún tenía energía y calor, y al pisar encima y atascarte entre los espacios pequeños interiores en el circulo te has llevado una descarga de más de 300V y no sobreviviste.</HTML>";
+            default:
+                return "MainOutput failed.";
+        }
+
     }
 
     private static String gameOverFrame(String language) {
@@ -307,8 +371,58 @@ public class Story {
         frame.setVisible(true);
         return "";
     }
+   
+    private static String errorScreen(String language, String errorText) {
+        JFrame frame = new JFrame("Conversational Game | DHR");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    
+        // Change the background color to a whiter red
+        JPanel redPanel = new JPanel();
+        redPanel.setBackground(new Color(255, 200, 200)); // A whiter shade of red
+    
+        JLabel MainTitle = new JLabel("Error", SwingConstants.CENTER);
+        MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
+        MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 30));
+    
+        JLabel Body = new JLabel(errorText, SwingConstants.CENTER);
+        Body.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        Body.setBorder(new EmptyBorder(0, 20, 20, 20));
+    
+        JPanel Panel = new JPanel();
+        Panel.setBackground(new Color(255, 200, 200));
+        JButton O1 = new JButton("Return to the menu");
+        O1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                Languages.main();
+            }
+        });
+        JButton O2 = new JButton("Exit the game");
+        O2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                System.exit(0);
+            }
+        });
+    
+        Panel.add(O1);
+        Panel.add(O2);
+    
+        redPanel.setLayout(new BorderLayout());
+        redPanel.add(MainTitle, BorderLayout.NORTH);
+        redPanel.add(Body, BorderLayout.CENTER);
+        redPanel.add(Panel, BorderLayout.SOUTH);
+    
+        frame.setContentPane(redPanel);
+        frame.setVisible(true);
+        return "";
+    }
     
     public static void main(String[] args) {
-        gameOverFrame("English");
+        errorScreen("Spanish","Error code: 423");
     }
 }

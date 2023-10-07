@@ -23,16 +23,16 @@ public class Languages {
                 Graphics2D g2d = (Graphics2D) g;
                 int width = getWidth();
                 int height = getHeight();
-                Color color1 = Color.LIGHT_GRAY; // Lightest gray
-                Color color2 = getBackground(); // Default color
+                Color color1 = Color.LIGHT_GRAY;
+                Color color2 = getBackground();
                 GradientPaint gp = new GradientPaint(0, 0, color1, 0, height, color2);
                 g2d.setPaint(gp);
                 g2d.fill(new Rectangle2D.Double(0, 0, width, height));
             }
         };
-
+        
         frame.setContentPane(gradientPanel);
-
+        
         // Welcome title + body
         JLabel MainTitle = new JLabel("Select Language / Elige el idioma", SwingConstants.CENTER);
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
