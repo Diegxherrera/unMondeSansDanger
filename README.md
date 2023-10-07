@@ -1,0 +1,2 @@
+# interactiveStory
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4f5c6e4d5ed1471f9f6ea8b967186396)](https://app.codacy.com/gh/diegxherrera/interactiveStory?utm_source=github.com&utm_medium=referral&utm_content=Diegxherrera/interactiveStory&utm_campaign=Badge_Grade)
