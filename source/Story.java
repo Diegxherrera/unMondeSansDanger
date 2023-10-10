@@ -1,5 +1,8 @@
+package source;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,14 +13,16 @@ public class Story {
     public static String[] phasesDone;
     public static String phaseKey = "0";
 
-    public static void createJFrame(int width, int height) {
+    public static void openStoryFrame() {
+        // Frame declaration
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+        ImageIcon icon = new ImageIcon("Story.png");
+        frame.setIconImage(icon.getImage());
 
-        // Create a custom JPanel for the gradient background
         JPanel gradientPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -36,18 +41,8 @@ public class Story {
         // Set the gradient panel as the content pane of the frame
         frame.setContentPane(gradientPanel);
 
-        gradientPanel.setLayout(new BorderLayout());
-        gradientPanel.add(Panel, BorderLayout.SOUTH);
-        gradientPanel.add(Location, BorderLayout.NORTH);
-        gradientPanel.add(Body, BorderLayout.CENTER);
-        frame.setVisible(true);
-    }
-
-    public static void openStoryFrame(String language) {
         // Location + Body + Panel
-        createJFrame(600, 400);
         JLabel Location = new JLabel(getLocationText(phaseKey), SwingConstants.LEFT);
-        System.out.println(phaseKey);
         Location.setFont(new Font("Segoe UI", Font.BOLD, 20));
         Location.setBorder(new EmptyBorder(35, 20, 0, 20));
 
@@ -160,110 +155,115 @@ public class Story {
                     default:
                         break;
                 }
+                if(phaseKey == "2D") {
+                    System.out.println("Oh no they're gon' die :(");
+                } else {
+                    Panel.add(O2);
+                }
+
             }
         });
 
         O2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (phaseKey.equals("3D") || phaseKey.equals("4B") || phaseKey.equals("4E") || phaseKey.equals("5B")
-                        || phaseKey.equals("5F") || phaseKey.equals("3F") || phaseKey.equals("5J")
-                        || phaseKey.equals("5M") || phaseKey.equals("4H")) {
-                    frame.dispose();
-                    gameOverFrame();
-                } else {
-                    switch (phaseKey) {
-                        case "0":
-                            O1.setText(getOption1("1B"));
-                            Body.setText(getMainOutput("1B"));
-                            O2.setText(getOption2("1B"));
-                            Location.setText(getLocationText("1B"));
-                            phaseKey = "1B";
-                            break;
-                        case "1A":
-                            O1.setText(getOption1("2B"));
-                            Body.setText(getMainOutput("2B"));
-                            O2.setText(getOption2("2B"));
-                            Location.setText(getLocationText("2B"));
-                            phaseKey = "2B";
-                            break;
-                        case "1B":
-                            O1.setText(getOption1("2D"));
-                            Body.setText(getMainOutput("2D"));
-                            O2.setText(getOption2("2D"));
-                            Location.setText(getLocationText("2D"));
-                            phaseKey = "2D";
-                            break;
-                        case "2A":
-                            O1.setText(getOption1("3B"));
-                            Body.setText(getMainOutput("3B"));
-                            O2.setText(getOption2("3B"));
-                            Location.setText(getLocationText("3B"));
-                            phaseKey = "3B";
-                            break;
-                        case "3A":
-                            gameOverFrame();
-                            phaseKey = "4B";
-                            break;
-                        case "3B":
-                            gameOverFrame();
-                            phaseKey = "4B";
-                            break;
-                        case "4A":
-                            gameOverFrame();
-                            phaseKey = "5B";
-                            break;
-                        case "2B":
-                            gameOverFrame();
-                            phaseKey = "3D";
-                            break;
-                        case "3C":
-                            gameOverFrame();
-                            phaseKey = "4E";
-                            break;
-                        case "4D":
-                            gameOverFrame();
-                            phaseKey = "5F";
-                            break;
-                        case "4C":
-                            O1.setText(getOption1("5D"));
-                            Body.setText(getMainOutput("5D"));
-                            O2.setText(getOption2("5D"));
-                            Location.setText(getLocationText("5D"));
-                            phaseKey = "5D";
-                            break;
-                        case "2C":
-                            gameOverFrame();
-                            phaseKey = "3F";
-                        case "3E":
-                            O1.setText(getOption1("4G"));
-                            Body.setText(getMainOutput("4G"));
-                            O2.setText(getOption2("4G"));
-                            Location.setText(getLocationText("4G"));
-                            phaseKey = "4G";
-                            break;
-                        case "4G":
-                            gameOverFrame();
-                            phaseKey = "5M";
-                            break;
-                        case "4F":
-                            O1.setText(getOption1("5K"));
-                            Body.setText(getMainOutput("5K"));
-                            O2.setText(getOption2("5K"));
-                            Location.setText(getLocationText("5K"));
-                            phaseKey = "5K";
-                            break;
-                        default:
-                            break;
-                    }
-
+                switch (phaseKey) {
+                    case "0":
+                        O1.setText(getOption1("1B"));
+                        O2.setText(getOption2("1B"));
+                        Body.setText(getMainOutput("1B"));
+                        Location.setText(getLocationText("1B"));
+                        phaseKey = "1B";
+                        break;
+                    case "1A":
+                        O1.setText(getOption1("2B"));
+                        Body.setText(getMainOutput("2B"));
+                        O2.setText(getOption2("2B"));
+                        Location.setText(getLocationText("2B"));
+                        phaseKey = "2B";
+                        break;
+                    case "1B":
+                        O1.setText(getOption1("2D"));
+                        Body.setText(getMainOutput("2D"));
+                        O2.setText(getOption2("2D"));
+                        Location.setText(getLocationText("2D"));
+                        phaseKey = "2D";
+                        break;
+                    case "2A":
+                        O1.setText(getOption1("3B"));
+                        Body.setText(getMainOutput("3B"));
+                        O2.setText(getOption2("3B"));
+                        Location.setText(getLocationText("3B"));
+                        phaseKey = "3B";
+                        break;
+                    case "3A":
+                        gameOverFrame();
+                        phaseKey = "4B";
+                        break;
+                    case "3B":
+                        gameOverFrame();
+                        phaseKey = "4B";
+                        break;
+                    case "4A":
+                        gameOverFrame();
+                        phaseKey = "5B";
+                        break;
+                    case "2B":
+                        gameOverFrame();
+                        phaseKey = "3D";
+                        break;
+                    case "3C":
+                        gameOverFrame();
+                        phaseKey = "4E";
+                        break;
+                    case "4D":
+                        gameOverFrame();
+                        phaseKey = "5F";
+                        break;
+                    case "4C":
+                        O1.setText(getOption1("5D"));
+                        Body.setText(getMainOutput("5D"));
+                        O2.setText(getOption2("5D"));
+                        Location.setText(getLocationText("5D"));
+                        phaseKey = "5D";
+                        break;
+                    case "2C":
+                        gameOverFrame();
+                        phaseKey = "3F";
+                    case "3E":
+                        O1.setText(getOption1("4G"));
+                        Body.setText(getMainOutput("4G"));
+                        O2.setText(getOption2("4G"));
+                        Location.setText(getLocationText("4G"));
+                        phaseKey = "4G";
+                        break;
+                    case "4G":
+                        gameOverFrame();
+                        phaseKey = "5M";
+                        break;
+                    case "4F":
+                        O1.setText(getOption1("5K"));
+                        Body.setText(getMainOutput("5K"));
+                        O2.setText(getOption2("5K"));
+                        Location.setText(getLocationText("5K"));
+                        phaseKey = "5K";
+                        break;
+                    default:
+                        break;
                 }
             }
         });
-
+        
         Panel.add(O1);
         Panel.add(O2);
+
+        gradientPanel.setLayout(new BorderLayout());
+        gradientPanel.add(Panel, BorderLayout.SOUTH);
+        gradientPanel.add(Location, BorderLayout.NORTH);
+        gradientPanel.add(Body, BorderLayout.CENTER);
+
+        frame.setVisible(true);
     }
-    
+
     private static String getLocationText(String phaseKey) {
         switch (phaseKey) {
             case "0":
@@ -354,7 +354,7 @@ public class Story {
             case "4B":
                 return "<HTML>Volver al menú</HTML>";
             default:
-                return "<HTML>Option.</HTML>";
+                return "<HTML>Option1 out of bound.</HTML>";
         }
     }
 
@@ -365,7 +365,7 @@ public class Story {
             case "1A":
                 return "<HTML>Decides salir de la fábrica.";
             case "1B":
-                return "<HTML>Vas directamente a la fábrica en búsqueda de la sala de los vídeos.</HTML>";
+                return "Vas a la fábrica.";
             case "2A":
                 return "<HTML>Visitas la sala y vas a otro piso.</HTML>";
             case "2B":
@@ -381,7 +381,7 @@ public class Story {
             case "3D":
                 return "<HTML>Cerrar el juego.</HTML>";
             case "3E":
-                return "<HTML>XXXXX</HTML>";
+                return "<HTML>Ayudar a Yumi</HTML>";
             case "3F":
                 return "<HTML>Cerrar el juego.</HTML>";
             case "4A":
@@ -389,10 +389,10 @@ public class Story {
             case "4B":
                 return "<HTML>Cerrar el juego.";
             default:
-                return "LocationText failed.";
+                return "<HTML>Option2 out of bound.</HTML>";
         }
     }
-    
+
     private static String getMainOutput(String phaseKey) {
         switch (phaseKey) {
             case "0":
@@ -471,7 +471,8 @@ public class Story {
         O1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                Languages.main();
+                phaseKey = "0";
+                Languages.openLanguagesFrame();
             }
         });
         JButton O2 = new JButton("Cerrar el juego.");
@@ -547,6 +548,6 @@ public class Story {
      * }
      */
     public static void main(String[] args) {
-        openStoryFrame("Spanish");
+        openStoryFrame();
     }
 }

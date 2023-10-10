@@ -1,4 +1,4 @@
-
+package source;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -102,18 +102,17 @@ public class Welcome {
 
         // Create a panel for the button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10)); // Centered button with vertical spacing
-        JButton closeButton = new JButton(proceedButtonText);
-        closeButton.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        closeButton.setFocusPainted(false); // Remove the focus border
-        closeButton.setPreferredSize(new Dimension(150, 30)); // Set button size
-        closeButton.addActionListener(new ActionListener() {
+        JButton proceedButton = new JButton(proceedButtonText);
+        proceedButton.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        proceedButton.setFocusPainted(false);
+        proceedButton.setPreferredSize(new Dimension(150, 30));
+        proceedButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.dispose(); // Close the window when the button is clicked
-                Story.openStoryFrame(language);
+                frame.dispose();
+                Story.openStoryFrame();
             }
         });
-        buttonPanel.add(closeButton);
-
+        buttonPanel.add(proceedButton);
         // Add components to the gradient panel
         gradientPanel.setLayout(new BorderLayout());
         gradientPanel.add(MainTitle, BorderLayout.NORTH);

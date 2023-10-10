@@ -1,3 +1,4 @@
+package source;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -8,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 public class Languages {
-    public static void main() {
+    public static void openLanguagesFrame() {
         // Frame declaration
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,5 +148,9 @@ public class Languages {
         gradientPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        openLanguagesFrame();
     }
 }
