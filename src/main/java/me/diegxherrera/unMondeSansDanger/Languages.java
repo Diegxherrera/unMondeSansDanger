@@ -1,15 +1,14 @@
-package source;
+package net.diegxherrera.story;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 public class Languages {
-    public static void openLanguagesFrame() {
+    public static void main() {
         // Frame declaration
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -148,9 +147,5 @@ public class Languages {
         gradientPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        openLanguagesFrame();
     }
 }

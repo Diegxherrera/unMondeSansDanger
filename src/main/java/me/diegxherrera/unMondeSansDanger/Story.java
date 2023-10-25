@@ -1,8 +1,7 @@
-package source;
+package net.diegxherrera.story;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,8 +19,6 @@ public class Story {
         frame.setSize(600, 400);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon("Story.png");
-        frame.setIconImage(icon.getImage());
 
         JPanel gradientPanel = new JPanel() {
             @Override
@@ -72,6 +69,8 @@ public class Story {
                         phaseKey = "2A";
                         break;
                     case "1B":
+                        Body.setBorder(new EmptyBorder(0, 20, 80, 20));
+                        Body.repaint();
                         O1.setText(getOption1("2C"));
                         Body.setText(getMainOutput("2C"));
                         O2.setText(getOption2("2C"));
@@ -143,7 +142,7 @@ public class Story {
                         break;
                     case "4F":
                         gameOverFrame();
-                        phaseKey = "5J";
+                        //phaseKey = "5J";
                         break;
                     case "4G":
                         O1.setText(getOption1("5L"));
@@ -153,10 +152,11 @@ public class Story {
                         phaseKey = "5L";
                         break;
                     default:
+                        frame.dispose();
                         break;
                 }
-                if(phaseKey == "2D") {
-                    System.out.println("Oh no they're gon' die :(");
+                if(phaseKey.equals("2D")) {
+                    System.out.println("XXX");
                 } else {
                     Panel.add(O2);
                 }
@@ -197,27 +197,27 @@ public class Story {
                         break;
                     case "3A":
                         gameOverFrame();
-                        phaseKey = "4B";
+                        //phaseKey = "4B";
                         break;
                     case "3B":
                         gameOverFrame();
-                        phaseKey = "4B";
+                        //phaseKey = "4B";
                         break;
                     case "4A":
                         gameOverFrame();
-                        phaseKey = "5B";
+                        //phaseKey = "5B";
                         break;
                     case "2B":
                         gameOverFrame();
-                        phaseKey = "3D";
+                        //phaseKey = "3D";
                         break;
                     case "3C":
                         gameOverFrame();
-                        phaseKey = "4E";
+                        //phaseKey = "4E";
                         break;
                     case "4D":
                         gameOverFrame();
-                        phaseKey = "5F";
+                        //phaseKey = "5F";
                         break;
                     case "4C":
                         O1.setText(getOption1("5D"));
@@ -228,7 +228,8 @@ public class Story {
                         break;
                     case "2C":
                         gameOverFrame();
-                        phaseKey = "3F";
+                        //phaseKey = "3F";
+                        break;
                     case "3E":
                         O1.setText(getOption1("4G"));
                         Body.setText(getMainOutput("4G"));
@@ -238,7 +239,7 @@ public class Story {
                         break;
                     case "4G":
                         gameOverFrame();
-                        phaseKey = "5M";
+                        //phaseKey = "5M";
                         break;
                     case "4F":
                         O1.setText(getOption1("5K"));
@@ -248,6 +249,7 @@ public class Story {
                         phaseKey = "5K";
                         break;
                     default:
+                        frame.dispose();
                         break;
                 }
             }
@@ -324,7 +326,7 @@ public class Story {
             case "0":
                 return "<HTML>Pasas el puente y entras.</HTML>";
             case "1A":
-                return "<HTML>Te acercas al ascensor a investigarlo.</HTML>";
+                return "Te acercas al ascensor a investigarlo.";
             case "1B":
                 return "<HTML>Buscas más sobre el archivo.</HTML>";
             case "2A":
@@ -373,7 +375,7 @@ public class Story {
             case "2C":
                 return "<HTML>Ir a la fábrica en búsqueda de respuestas.</HTML>";
             case "3A":
-                return "<HTML>Decides andar encima del círculo que hay dibujado en el suelo.</HTML>";
+                return "Vas por encima del círculo que hay en el suelo.";
             case "3B":
                 return "<HTML>Decides andar encima del círculo que hay dibujado en el suelo.</HTML>";
             case "3C":
@@ -460,9 +462,7 @@ public class Story {
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
         MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 30));
 
-        JLabel Body = new JLabel(
-                "<HTML><center>Lo podrías haber hecho mejor, has elegido una serie de decisiones erróneas que te han llevado a tu situación actual.</center></HTML>",
-                SwingConstants.CENTER);
+        JLabel Body = new JLabel("<HTML><center>Lo podrías haber hecho mejor, has elegido una serie de decisiones erróneas que te han llevado a tu situación actual.</center></HTML>", SwingConstants.CENTER);
         Body.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         Body.setBorder(new EmptyBorder(0, 20, 20, 20));
 
@@ -471,7 +471,6 @@ public class Story {
         O1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                phaseKey = "0";
                 Languages.openLanguagesFrame();
             }
         });
