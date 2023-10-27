@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 class Frame {
     public static String phaseKey = "0";
-    public String windowName = "";
+    public String windowName;
     JLabel Location = new JLabel(Story.getLocationText(this.phaseKey), SwingConstants.LEFT);
     JLabel Body = new JLabel(Story.getMainOutput(this.phaseKey), SwingConstants.LEFT);
     JLabel O1 = new JLabel(Story.getOption1(this.phaseKey), SwingConstants.LEFT);
@@ -347,7 +347,8 @@ public class Story {
             case "3C":
                 return "Bosque Kádic";
             case "3D":
-                return "getLocationText() failed when receiving current phase. This phase is a GAME OVER.";
+                return "getLocationText() failed when receiving " +
+                        "current phase. This phase is a GAME OVER.";
             case "3E":
                 return "Boulogne-Billancourt, Francia";
             case "3F":
@@ -431,11 +432,13 @@ public class Story {
             case "2B":
                 return "<HTML>Le ignoras y le dices que es normal.</HTML>";
             case "2C":
-                return "<HTML>Ir a la fábrica en búsqueda de respuestas.</HTML>";
+                return "<HTML>Ir a la fábrica en búsqueda de respuestas." +
+                        "</HTML>";
             case "3A":
                 return "Vas por encima del círculo que hay en el suelo.";
             case "3B":
-                return "<HTML>Decides andar encima del círculo que hay dibujado en el suelo.</HTML>";
+                return "<HTML>Decides andar encima del círculo que " +
+                        "hay dibujado en el suelo.</HTML>";
             case "3C":
                 return "<HTML>Visitar el Piso -2</HTML>";
             case "3D":
