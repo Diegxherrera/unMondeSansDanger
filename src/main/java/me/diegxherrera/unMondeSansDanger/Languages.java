@@ -1,4 +1,4 @@
-package net.diegxherrera.story;
+package me.diegxherrera.unMondeSansDanger;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -38,7 +38,7 @@ public class Languages {
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
         MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 30));
 
-        // Available in different languages
+        // Availability in different languages
         JLabel Body = new JLabel("<HTML><center>Available in English / Disponible en español / Disponibile in Italiano / Disponible en français / Disponível em Português / Verfügbar auf Deutsch / 可用于中文 / 日本語で利用可能 / متاح باللغة العربية<center></HTML>", SwingConstants.CENTER);
         Body.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         Body.setBorder(new EmptyBorder(0, 40, 0, 10));
@@ -58,6 +58,7 @@ public class Languages {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false); // Make the button panel transparent
         buttonPanel.add(englishButton);
+
         englishButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();

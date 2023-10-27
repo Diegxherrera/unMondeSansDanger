@@ -1,4 +1,6 @@
-package net.diegxherrera.story;
+package me.diegxherrera.unMondeSansDanger;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 public class Welcome {
-    public void displayWelcomeFrame(String language) {
+    public void displayWelcomeFrame(@NotNull String language) {
         String title;
         String bodyLang;
         String proceedButtonText;
@@ -68,8 +70,6 @@ public class Welcome {
 
         // Frame declaration
         JFrame frame = new JFrame("Conversational Game | DHR");
-        ImageIcon icon = new ImageIcon("Story.png");
-        frame.setIconImage(icon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
         frame.setResizable(false);
@@ -106,11 +106,9 @@ public class Welcome {
         closeButton.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         closeButton.setFocusPainted(false); // Remove the focus border
         closeButton.setPreferredSize(new Dimension(150, 30)); // Set button size
-        closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose(); // Close the window when the button is clicked
-                Story.openStoryFrame(language);
-            }
+        closeButton.addActionListener(e -> {
+            frame.dispose(); // Close the window when the button is clicked
+            Story.openStoryFrame();
         });
         buttonPanel.add(closeButton);
 
