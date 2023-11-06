@@ -1,14 +1,12 @@
 package me.diegxherrera.unMondeSansDanger;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class Welcome {
-    public void displayWelcomeFrame(@NotNull String language) {
+    public void displayWelcomeFrame(String language) {
         String title;
         String bodyLang;
         String proceedButtonText;
@@ -124,7 +122,7 @@ public class Welcome {
         closeButton.setPreferredSize(new Dimension(150, 30));
         closeButton.addActionListener(e -> {
             frame.dispose();
-            Story.openStoryFrame();
+            Story.main(new String[]{"", ""});
         });
         buttonPanel.add(closeButton);
 
