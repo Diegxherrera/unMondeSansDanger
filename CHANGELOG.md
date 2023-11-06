@@ -38,3 +38,12 @@
 
 ### Fixed
   - Met quality gates by fixing longer lines than allowed.
+
+## (2.0-alpha) - 6th Nov 2023
+
+### Added
+  - Database <---> Client system for retrieving phases data.
+  - Phases System now working using a database with a CSV.
+  - Frame class method: updateUI() that will update texts according to the phase key.
+  - Frame class method: retrieveDataFromDatabase() which will may run the requested query to the database.
+  - Dark mode on the works.
