@@ -8,8 +8,6 @@ import java.sql.*;
 
 class Frame {
     private static String phaseKey = "0";
-    String[] phaseKeyArray = phaseKey.split("");
-    private boolean deadPhase = false;
     JLabel Location = new JLabel(retrieveDataFromDatabase(phaseKey,"Location")
             , SwingConstants.LEFT);
     JLabel Body = new JLabel(retrieveDataFromDatabase(phaseKey,"Body")
@@ -17,11 +15,11 @@ class Frame {
     JButton Option1 = new JButton(retrieveDataFromDatabase(phaseKey,"Option1"));
     JButton Option2 = new JButton(retrieveDataFromDatabase(phaseKey,"Option2"));
 
-    public Frame(String phaseKey) {
-        this.phaseKey = phaseKey;
-        createFrame();
+    public Frame() {
+        startGameFrame();
     }
-    void showEndingFrames() {
+    private void showEndingFrames() {
+        // Declaration and config of the window.
         JFrame frame = new JFrame("Conversational Game | DHR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 420);
@@ -30,24 +28,28 @@ class Frame {
         frame.setVisible(true);
 
         JPanel gradientPanel = getLightPanel();
+        System.out.println(phaseKey);
+        String[] phaseKeyArray = phaseKey.split("");
 
         String mainText;
-        if (phaseKeyArray[0].equals("M")){
+        if (phaseKeyArray[0].equals("O")){
             mainText = "GAME OVER";
-        } else if (phaseKeyArray[0].equals("G")) {
+        } else if (phaseKeyArray[0].equals("W")) {
             mainText = "WINNER!";
         } else {
-            mainText = "Check NextPhase()";
+            mainText = "";
         }
         JLabel MainTitle = new JLabel(mainText, SwingConstants.CENTER);
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
         MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 50));
-        System.out.println(phaseKey);
+
         JLabel Body = new JLabel(retrieveDataFromDatabase(phaseKey, "GameOver"), SwingConstants.CENTER);
-        if (phaseKeyArray[0].equals("M")){
-            Body = new JLabel(retrieveDataFromDatabase(phaseKey, "GameOver"), SwingConstants.CENTER);
-        } else if (phaseKeyArray[0].equals("M")) {
-            Body = new JLabel("Has conseguido llegar al final (realmente no sé cómo), enhorabuena por jugar a Un Monde Sans Danger", SwingConstants.CENTER);
+        if (phaseKeyArray[0].equals("O")){
+            Body = new JLabel("<HTML><center>" + retrieveDataFromDatabase(phaseKey, "GameOver") +
+                    "</center></HTML>", SwingConstants.CENTER);
+        } else if (phaseKeyArray[0].equals("W")) {
+            Body = new JLabel("<HTML><center>Has conseguido llegar al final (realmente no sé cómo). Enhorabuena " +
+                    "por ganar en Un Monde Sans Danger</center></HTML>", SwingConstants.CENTER);
         }
         Body.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         Body.setBorder(new EmptyBorder(0, 20, 20, 20));
@@ -56,7 +58,9 @@ class Frame {
 
         JButton O1 = new JButton("Volver al menú.");
         O1.addActionListener(e -> {
-            frame.dispose();
+            frame.setVisible(false);
+            phaseKey = "0";
+            startGameFrame();
         });
 
         JButton O2 = new JButton("Cerrar el juego.");
@@ -86,25 +90,7 @@ class Frame {
                 int width = getWidth();
                 int height = getHeight();
                 Color color1 = Color.LIGHT_GRAY;
-                Color color2 = getBackground();
-                GradientPaint gp = new GradientPaint(0, 0, color1, 0, height, color2);
-                g2d.setPaint(gp);
-                g2d.fill(new Rectangle2D.Double(0, 0, width, height));
-            }
-        };
-        return gradientPanel;
-    }
-    private static JPanel getDarkPanel() {
-        JPanel gradientPanel;
-        gradientPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
-                int width = getWidth();
-                int height = getHeight();
-                Color color1 = new Color(20, 20, 20);  // Dark color
-                Color color2 = new Color(50, 50, 50);  // Slightly lighter color
+                Color color2 = Color.WHITE;
                 GradientPaint gp = new GradientPaint(0, 0, color1, 0, height, color2);
                 g2d.setPaint(gp);
                 g2d.fill(new Rectangle2D.Double(0, 0, width, height));
@@ -119,27 +105,24 @@ class Frame {
         Option2.setText(retrieveDataFromDatabase(phaseKey, "Option2"));
     }
     private void nextPhaseKey(String option) {
-        String NextPhases;
-        NextPhases = retrieveDataFromDatabase(phaseKey, "NextPhase");
-        String[] availablePhases = NextPhases.split(",");
+        String nextPhases = retrieveDataFromDatabase(phaseKey, "NextPhase");
+        String[] availablePhases = nextPhases.split(",");
+
         if (availablePhases.length >= 2) {
-            if (option.equals("Option1")) {
-                phaseKey = availablePhases[0];
-                String[] phaseKeyArray = phaseKey.split("");
-                System.out.println(phaseKeyArray[0] + " " + phaseKeyArray[1]);
-                if (!phaseKeyArray[0].equals("M")) {
-                    updateUI();
-                } else {
+            String selectedPhase = option.equals("Option1") ? availablePhases[0] : availablePhases[1];
+            String[] phaseKeyArray = selectedPhase.split("");
+            System.out.println(selectedPhase);
+
+            if (phaseKeyArray.length >= 2) {
+                if (phaseKeyArray[0].equals("O") || phaseKeyArray[0].equals("W")) {
+                    phaseKey = selectedPhase;
                     showEndingFrames();
-                }
-                updateUI();
-            } else if (option.equals("Option2")) {
-                phaseKey = availablePhases[1];
-                if (!phaseKeyArray[0].equals("M")) {
-                    updateUI();
                 } else {
-                    showEndingFrames();
+                    phaseKey = selectedPhase;
+                    updateUI();
                 }
+            } else {
+                System.out.println("Invalid phase key format.");
             }
         } else {
             System.out.println("Not enough phases for Option2.");
@@ -172,7 +155,7 @@ class Frame {
         }
         return "resultSet is not working as expected";
     }
-    private JFrame createFrame() {
+    public JFrame startGameFrame() {
         // Declaration of frame disposition and presentation
         String windowName = "Conversational Game | DHR";
         JFrame frame = new JFrame(windowName);
@@ -193,30 +176,29 @@ class Frame {
         Location.setBorder(new EmptyBorder(35, 20, 0, 20));
         Body.setBorder(new EmptyBorder(0, 20, 20, 20));
 
-        JPanel Panel = new JPanel();
-        Panel.add(Option1);
-        Panel.add(Option2);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(Option1);
+        buttonPanel.add(Option2);
 
         JPanel mainOutputPanel = new JPanel();
         mainOutputPanel.setLayout(new BoxLayout(mainOutputPanel, BoxLayout.Y_AXIS));
         mainOutputPanel.add(Location);
-        mainOutputPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Margin between Location and Body
+        mainOutputPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         mainOutputPanel.add(Body);
 
         Option1.addActionListener(e -> nextPhaseKey("Option1"));
         Option2.addActionListener(e -> nextPhaseKey("Option2"));
 
         gradientPanel.setLayout(new BorderLayout());
-        gradientPanel.add(Panel, BorderLayout.SOUTH);
+        gradientPanel.add(buttonPanel, BorderLayout.SOUTH);
         gradientPanel.add(mainOutputPanel, BorderLayout.CENTER);
 
         frame.setVisible(true);
         return frame;
     }
 }
-
 public class Story {
     public static void main(String[] args) {
-        Frame frame = new Frame("0");
+        new Frame();
     }
 }

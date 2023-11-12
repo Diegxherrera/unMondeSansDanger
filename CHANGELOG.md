@@ -43,7 +43,25 @@
 
 ### Added
   - Database <---> Client system for retrieving phases data.
-  - Phases System now working using a database with a CSV.
-  - Frame class method: updateUI() that will update texts according to the phase key.
-  - Frame class method: retrieveDataFromDatabase() which will may run the requested query to the database.
+  - Phases System now working using a database with a CSV column.
+  - Frame class method: `updateUI()` that will update texts according to the phase key.
+  - Frame class method: `retrieveDataFromDatabase()` which may run the requested query to the database.
   - Dark mode on the works.
+
+## (2.1-alpha) - 12th Nov 2023
+
+### Added
+  - `Frame.startGameFrame()` now features a panel for Location and Body. 
+  - `Frame`
+### Changed
+  - `Frame` constructor not asking anymore for the phaseKey as an argument (Avoided unnecessary arguments).
+  - Triggering characters for `showEndingFrames()` now changed characters from 'D' and 'G' to 'O' and 'W'.
+  - Button panel renamed from `Panel` to `buttonPanel` to clarify its use.
+
+### Fixed
+  - `Frame.showEndingFrames()` method was searching for the trigger character wrongly. Condition was always false.
+  - `Frame.nextPhaseKey()` method now makes the query and separates effectively the final phases screens.
+
+### Deprecated
+  - Dark mode not in the works anymore.
+  - Phase processor to make 'O4B' be '4B' removed due to being inefficient. 
