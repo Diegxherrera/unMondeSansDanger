@@ -1,34 +1,37 @@
-package me.diegxherrera.unMondeSansDanger;
+package me.diegxherrera.umsd;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.sql.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 class Frame {
     private static String phaseKey = "0";
-    JLabel Location = new JLabel(retrieveDataFromDatabase(phaseKey,"Location")
-            , SwingConstants.LEFT);
-    JLabel Body = new JLabel(retrieveDataFromDatabase(phaseKey,"Body")
-            , SwingConstants.LEFT);
+    public static String language = "es_ES";
+
+    // All data of interfaces is declared in here:
+    JLabel Location = new JLabel(retrieveDataFromDatabase(phaseKey,"Location"));
+    JLabel Body = new JLabel(retrieveDataFromDatabase(phaseKey,"Body"));
     JButton Option1 = new JButton(retrieveDataFromDatabase(phaseKey,"Option1"));
     JButton Option2 = new JButton(retrieveDataFromDatabase(phaseKey,"Option2"));
+    protected static final Logger logger = LogManager.getLogger();
 
     public Frame() {
         startGameFrame();
     }
     private void showEndingFrames() {
         // Declaration and config of the window.
-        JFrame frame = new JFrame("Conversational Game | DHR");
+        JFrame frame = new JFrame("Un Monde Sans Danger");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 420);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        JPanel gradientPanel = getLightPanel();
-        System.out.println(phaseKey);
         String[] phaseKeyArray = phaseKey.split("");
 
         String mainText;
@@ -55,10 +58,10 @@ class Frame {
         Body.setBorder(new EmptyBorder(0, 20, 20, 20));
 
         JPanel Panel = new JPanel();
+        Panel.setOpaque(false);
 
         JButton O1 = new JButton("Volver al menú.");
         O1.addActionListener(e -> {
-            frame.setVisible(false);
             phaseKey = "0";
             startGameFrame();
         });
@@ -72,6 +75,7 @@ class Frame {
         Panel.add(O1);
         Panel.add(O2);
 
+        JPanel gradientPanel = getLightPanel();
         gradientPanel.setLayout(new BorderLayout());
         gradientPanel.add(MainTitle, BorderLayout.NORTH);
         gradientPanel.add(Body, BorderLayout.CENTER);
@@ -102,7 +106,12 @@ class Frame {
         Location.setText(retrieveDataFromDatabase(phaseKey, "Location"));
         Body.setText(retrieveDataFromDatabase(phaseKey, "Body"));
         Option1.setText(retrieveDataFromDatabase(phaseKey, "Option1"));
-        Option2.setText(retrieveDataFromDatabase(phaseKey, "Option2"));
+        logger.info("UI updated successfully.");
+        if(phaseKey.equals("2D") || phaseKey.equals("3G")){
+            Option2.setVisible(false);
+        } else {
+            Option2.setText(retrieveDataFromDatabase(phaseKey, "Option2"));
+        }
     }
     private void nextPhaseKey(String option) {
         String nextPhases = retrieveDataFromDatabase(phaseKey, "NextPhase");
@@ -128,7 +137,7 @@ class Frame {
             System.out.println("Not enough phases for Option2.");
         }
     }
-    private String retrieveDataFromDatabase(String phaseKey, String requestedContent) {
+    private String retrieveDataFromDatabase(String phaseKey, String requestedContent)  {
         String url = "jdbc:mysql://localhost:3306/UMSD";
         String username = "root";
         String password = "rootpassword";
@@ -137,7 +146,7 @@ class Frame {
             // Connection and query
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
-            String sqlQuery = "SELECT " + requestedContent + " FROM Phases WHERE phaseKey='" + phaseKey + "'";
+            String sqlQuery = "SELECT " + requestedContent + " FROM " + language + "Phases" + " WHERE phaseKey='" + phaseKey + "'";
             ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             String data;
@@ -150,14 +159,14 @@ class Frame {
                 return data;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return "Error 1: Data Not Found";
+            logger.error(e);
+            startGameFrame();
         }
         return "resultSet is not working as expected";
     }
-    public JFrame startGameFrame() {
+    private void startGameFrame() {
         // Declaration of frame disposition and presentation
-        String windowName = "Conversational Game | DHR";
+        String windowName = "Un Monde Sans Danger";
         JFrame frame = new JFrame(windowName);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 420);
@@ -179,12 +188,14 @@ class Frame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(Option1);
         buttonPanel.add(Option2);
+        buttonPanel.setOpaque(false);
 
         JPanel mainOutputPanel = new JPanel();
         mainOutputPanel.setLayout(new BoxLayout(mainOutputPanel, BoxLayout.Y_AXIS));
         mainOutputPanel.add(Location);
         mainOutputPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         mainOutputPanel.add(Body);
+        mainOutputPanel.setOpaque(false);
 
         Option1.addActionListener(e -> nextPhaseKey("Option1"));
         Option2.addActionListener(e -> nextPhaseKey("Option2"));
@@ -194,7 +205,6 @@ class Frame {
         gradientPanel.add(mainOutputPanel, BorderLayout.CENTER);
 
         frame.setVisible(true);
-        return frame;
     }
 }
 public class Story {

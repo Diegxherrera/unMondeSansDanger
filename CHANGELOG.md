@@ -31,9 +31,6 @@
   - Buttons action listeners now using lambdas instead of old functions.
   - JFrame now is not generated as a whole each time we call `openStoryFrame()`, instances are doing so from `Frame` class.
 
-### Fixed
-  - None
-
 ## (1.1.1-alpha) - 27th Oct 2023
 
 ### Fixed
@@ -52,7 +49,7 @@
 
 ### Added
   - `Frame.startGameFrame()` now features a panel for Location and Body. 
-  - `Frame`
+
 ### Changed
   - `Frame` constructor not asking anymore for the phaseKey as an argument (Avoided unnecessary arguments).
   - Triggering characters for `showEndingFrames()` now changed characters from 'D' and 'G' to 'O' and 'W'.
@@ -65,3 +62,17 @@
 ### Deprecated
   - Dark mode not in the works anymore.
   - Phase processor to make 'O4B' be '4B' removed due to being inefficient. 
+
+## (2.2-alpha) - 17th Nov 2023
+
+### Added
+  - Now, `Un Monde Sans Danger` has the Log4j logger to improve mainteinance and promote a better understanding 
+    of the errors.
+  - The project now has a README with information on how to set up the project and insights.
+
+### Changed
+  - Package name changed from 'unMondeSansDanger' to 'umsd' to comply with naming conventions.
+  - `printStackTrace()` method was replaced as a logger with log4j.
+
+### Fixed
+  - Phases 2D and 3G featured a single-button panel, but wrongly two buttons were being rendered.

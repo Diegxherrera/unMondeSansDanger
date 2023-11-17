@@ -1,4 +1,4 @@
-package me.diegxherrera.unMondeSansDanger;
+package me.diegxherrera.umsd;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
