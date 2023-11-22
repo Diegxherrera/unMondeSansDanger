@@ -1,5 +1,19 @@
 # Changelog
 
+## (2.3.1-alpha) - 22/11/2023
+
+### Added
+- `GameController` now uses Log4J to log exceptions.
+- Software depolyment is on the works using Docker.
+- New logo (AI-generated) included in the project.
+
+### Changed
+- `DatabaseManager.retrieveDatabase()` now is a monadic method, phaseKey argument was pointless. Former argument was 
+  replaced with `GameController.phaseKey`.
+
+### Removed
+- Story.png (AKA Logo) removed due to a redesign.
+
 ## (2.3-alpha) - 20/11/2023
 
 ### Added
@@ -67,7 +81,8 @@
 
 ### Changed
 - Buttons action listeners now using lambdas instead of old functions.
-- JFrame now is not generated as a whole each time we call `openStoryFrame()`, instances are doing so from `Frame` class.
+- JFrame now is not generated as a whole each time we call `openStoryFrame()`, instances are doing so from 
+  `Frame` class.
 
 
 ## (1.0.2-alpha) - 25/10/2023

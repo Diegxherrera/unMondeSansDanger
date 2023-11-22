@@ -9,21 +9,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 class GameFrame {
-    public static String language = "es_ES";
+    static final String language = "es_ES";
 
-    // All data of interfaces is declared in here:
-    static JLabel Location = new JLabel(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey,
-            "Location"));
-    static JLabel Body = new JLabel(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey,
-            "Body"));
-    static JButton Option1 = new JButton(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey,
-            "Option1"));
-    static JButton Option2 = new JButton(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey,
-            "Option2"));
+    // All components of the interface are declared in here:
+    static JLabel Location = new JLabel(DatabaseManager.retrieveDataFromDatabase("Location"));
+    static JLabel Body = new JLabel(DatabaseManager.retrieveDataFromDatabase("Body"));
+    static JButton Option1 = new JButton(DatabaseManager.retrieveDataFromDatabase("Option1"));
+    static JButton Option2 = new JButton(DatabaseManager.retrieveDataFromDatabase("Option2"));
     protected static final Logger logger = LogManager.getLogger();
 
     public GameFrame() {
-        startGameFrame();
+        showStoryFrame();
     }
     static void showEndingFrames() {
         // Declaration and config of the window.
@@ -48,11 +44,9 @@ class GameFrame {
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
         MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 50));
 
-        JLabel Body = new JLabel(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey,
-                "GameOver"), SwingConstants.CENTER);
+        JLabel Body = new JLabel(DatabaseManager.retrieveDataFromDatabase("GameOver"), SwingConstants.CENTER);
         if (phaseKeyArray[0].equals("O")){
-            Body = new JLabel("<HTML><center>" + DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey,
-                    "GameOver") +
+            Body = new JLabel("<HTML><center>" + DatabaseManager.retrieveDataFromDatabase("GameOver") +
                     "</center></HTML>", SwingConstants.CENTER);
         } else if (phaseKeyArray[0].equals("W")) {
             Body = new JLabel("<HTML><center>Has conseguido llegar al final (realmente no sé cómo). Enhorabuena " +
@@ -67,7 +61,7 @@ class GameFrame {
         JButton O1 = new JButton("Volver al menú.");
         O1.addActionListener(e -> {
             GameController.phaseKey = "0";
-            startGameFrame();
+            showStoryFrame();
         });
 
         JButton O2 = new JButton("Cerrar el juego.");
@@ -107,18 +101,17 @@ class GameFrame {
         return gradientPanel;
     }
     static void updateUI() {
-        Location.setText(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey, "Location"));
-        Body.setText(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey, "Body"));
-        Option1.setText(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey, "Option1"));
+        Location.setText(DatabaseManager.retrieveDataFromDatabase("Location"));
+        Body.setText(DatabaseManager.retrieveDataFromDatabase("Body"));
+        Option1.setText(DatabaseManager.retrieveDataFromDatabase("Option1"));
         logger.info("UI updated successfully.");
         if(GameController.phaseKey.equals("2D") || GameController.phaseKey.equals("3G")){
             Option2.setVisible(false);
         } else {
-            Option2.setText(DatabaseManager.retrieveDataFromDatabase(GameController.phaseKey,
-                    "Option2"));
+            Option2.setText(DatabaseManager.retrieveDataFromDatabase("Option2"));
         }
     }
-    static void startGameFrame() {
+    static void showStoryFrame() {
         // Declaration of frame disposition and presentation
         String windowName = "Un Monde Sans Danger";
         JFrame frame = new JFrame(windowName);

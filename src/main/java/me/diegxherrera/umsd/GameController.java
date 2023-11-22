@@ -1,10 +1,14 @@
 package me.diegxherrera.umsd;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class GameController {
     static String phaseKey = "0";
+    protected static final Logger logger = LogManager.getLogger();
 
     static void nextPhaseKey(String option) {
-        String nextPhases = DatabaseManager.retrieveDataFromDatabase(phaseKey, "NextPhase");
+        String nextPhases = DatabaseManager.retrieveDataFromDatabase("NextPhase");
         String[] availablePhases = nextPhases.split(",");
 
         if (availablePhases.length >= 2) {
@@ -21,10 +25,10 @@ public class GameController {
                     GameFrame.updateUI();
                 }
             } else {
-                System.out.println("Invalid phase key format.");
+                logger.error("Invalid phase key format.");
             }
         } else {
-            System.out.println("Not enough phases for Option2.");
+            logger.error("Not enough phases for Option2.");
         }
     }
 }

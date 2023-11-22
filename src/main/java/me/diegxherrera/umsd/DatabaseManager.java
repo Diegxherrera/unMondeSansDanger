@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 public class DatabaseManager {
     protected static final Logger logger = LogManager.getLogger();
 
-    public static String retrieveDataFromDatabase(String phaseKey, String requestedContent)  {
+    public static String retrieveDataFromDatabase(String requestedContent)  {
         String url = "jdbc:mysql://localhost:3306/UMSD";
         String username = "root";
         String password = "rootpassword";
@@ -16,7 +16,7 @@ public class DatabaseManager {
             // Connection and query
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
-            String sqlQuery = "SELECT " + requestedContent + " FROM " + GameFrame.language + "Phases" + " WHERE phaseKey='" + phaseKey + "'";
+            String sqlQuery = "SELECT " + requestedContent + " FROM " + GameFrame.language + "Phases" + " WHERE phaseKey='" + GameController.phaseKey + "'";
             ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             String data;
@@ -29,13 +29,11 @@ public class DatabaseManager {
                 return data;
             }
         } catch (SQLException e) {
-            logger.error(e);
             if (e.getMessage().contains("No suitable driver was found.")) {
-                System.out.println("The MySQL connector driver is missing.");
-            } else {
-                System.out.println("SQL Error: " + e.getMessage());
+                logger.error(e);
             }
-            GameFrame.startGameFrame();
+
+            GameFrame.showStoryFrame();
         }
         return "resultSet is not working as expected";
     }
