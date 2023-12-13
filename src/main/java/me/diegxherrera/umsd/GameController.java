@@ -4,11 +4,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class GameController {
-    static String phaseKey = "0";
+    String phaseKey = "0";
     protected static final Logger logger = LogManager.getLogger();
+    private final DIContainer container;
 
-    static void nextPhaseKey(String option) {
-        String nextPhases = DatabaseManager.retrieveDataFromDatabase("NextPhase");
+    public GameController(DIContainer container) {
+        this.container = container;
+    }
+
+    void nextPhaseKey(String option) {
+        String nextPhases = ControllerDBManager.retrieveDataFromDatabase("NextPhase");
         String[] availablePhases = nextPhases.split(",");
 
         if (availablePhases.length >= 2) {
@@ -19,10 +24,10 @@ public class GameController {
             if (phaseKeyArray.length >= 2) {
                 if (phaseKeyArray[0].equals("O") || phaseKeyArray[0].equals("W")) {
                     phaseKey = selectedPhase;
-                    GameFrame.showEndingFrames();
+                    ControllerFrame.showEndingFrames();
                 } else {
                     phaseKey = selectedPhase;
-                    GameFrame.updateUI();
+                    ControllerFrame.updateUI();
                 }
             } else {
                 logger.error("Invalid phase key format.");

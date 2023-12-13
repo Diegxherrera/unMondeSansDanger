@@ -1,5 +1,15 @@
 # Changelog
 
+## (1.0-release) - 01/12/2023
+
+### Added
+- 
+
+### Changed
+- `GameController`, `GameFrame` and `DatabaseManager` implement field injection in order to comply with best 
+  practices and avoid stack overflow when instantiating.
+- 
+
 ## (2.3.1-alpha) - 22/11/2023
 
 ### Added

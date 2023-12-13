@@ -6,7 +6,7 @@
 
     <groupId>me.diegxherrera</groupId>
     <artifactId>unMondeSansDanger</artifactId>
-    <version>2.3.1-ALPHA</version>
+    <version>1.0.0-RELEASE</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

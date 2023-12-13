@@ -2,6 +2,8 @@ package me.diegxherrera.umsd;
 
 public class Main {
     public static void main(String[] args) {
-        new GameFrame();
+        DIContainer container = new DIContainer();
+        GameFrame gameFrame = new GameFrame(container);
+        gameFrame.
     }
 }

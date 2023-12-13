@@ -6,17 +6,20 @@ import org.apache.logging.log4j.Logger;
 
 public class DatabaseManager {
     protected static final Logger logger = LogManager.getLogger();
+    DIContainer DBContainer = new DIContainer();
+    GameController DBController = DBContainer.getGameController();
+    GameFrame DBFrame = DBContainer.getGameFrame();
 
-    public static String retrieveDataFromDatabase(String requestedContent)  {
+    public String retrieveDataFromDatabase(String requestedContent)  {
         String url = "jdbc:mysql://localhost:3306/UMSD";
         String username = "root";
         String password = "rootpassword";
 
         try {
-            // Connection and query
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
-            String sqlQuery = "SELECT " + requestedContent + " FROM " + GameFrame.language + "Phases" + " WHERE phaseKey='" + GameController.phaseKey + "'";
+            String sqlQuery = "SELECT " + requestedContent + " FROM " + "es_ES" + "Phases" +
+                    " WHERE phaseKey='" + DBController.phaseKey + "'";
             ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             String data;
@@ -33,7 +36,7 @@ public class DatabaseManager {
                 logger.error(e);
             }
 
-            GameFrame.showStoryFrame();
+            DBFrame.showStoryFrame();
         }
         return "resultSet is not working as expected";
     }

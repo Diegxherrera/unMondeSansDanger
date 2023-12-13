@@ -9,19 +9,24 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 class GameFrame {
-    static final String language = "es_ES";
+    private final DIContainer container;
+    private final GameController frameController;
+    private final DatabaseManager frameDBManager;
 
     // All components of the interface are declared in here:
-    static JLabel Location = new JLabel(DatabaseManager.retrieveDataFromDatabase("Location"));
-    static JLabel Body = new JLabel(DatabaseManager.retrieveDataFromDatabase("Body"));
-    static JButton Option1 = new JButton(DatabaseManager.retrieveDataFromDatabase("Option1"));
-    static JButton Option2 = new JButton(DatabaseManager.retrieveDataFromDatabase("Option2"));
-    protected static final Logger logger = LogManager.getLogger();
+    JLabel Location = new JLabel(frameDBManager.retrieveDataFromDatabase("Location"));
+    JLabel Body = new JLabel(frameDBManager.retrieveDataFromDatabase("Body"));
+    JButton Option1 = new JButton(frameDBManager.retrieveDataFromDatabase("Option1"));
+    JButton Option2 = new JButton(frameDBManager.retrieveDataFromDatabase("Option2"));
+    protected final Logger logger = LogManager.getLogger();
 
-    public GameFrame() {
-        showStoryFrame();
+    public GameFrame(DIContainer container) {
+        this.container = container;
+        this.frameController = container.getGameController();
+        this.frameDBManager = container.getDatabaseManager();
     }
-    static void showEndingFrames() {
+
+    void showEndingFrames() {
         // Declaration and config of the window.
         JFrame frame = new JFrame("Un Monde Sans Danger");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,7 +35,7 @@ class GameFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        String[] phaseKeyArray = GameController.phaseKey.split("");
+        String[] phaseKeyArray = FrameController.phaseKey.split("");
 
         String mainText;
         if (phaseKeyArray[0].equals("O")){
@@ -44,9 +49,9 @@ class GameFrame {
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
         MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 50));
 
-        JLabel Body = new JLabel(DatabaseManager.retrieveDataFromDatabase("GameOver"), SwingConstants.CENTER);
+        JLabel Body = new JLabel(FrameDBManager.retrieveDataFromDatabase("GameOver"), SwingConstants.CENTER);
         if (phaseKeyArray[0].equals("O")){
-            Body = new JLabel("<HTML><center>" + DatabaseManager.retrieveDataFromDatabase("GameOver") +
+            Body = new JLabel("<HTML><center>" + FrameDBManager.retrieveDataFromDatabase("GameOver") +
                     "</center></HTML>", SwingConstants.CENTER);
         } else if (phaseKeyArray[0].equals("W")) {
             Body = new JLabel("<HTML><center>Has conseguido llegar al final (realmente no sé cómo). Enhorabuena " +
@@ -60,7 +65,7 @@ class GameFrame {
 
         JButton O1 = new JButton("Volver al menú.");
         O1.addActionListener(e -> {
-            GameController.phaseKey = "0";
+            FrameController.phaseKey = "0";
             showStoryFrame();
         });
 
@@ -82,7 +87,7 @@ class GameFrame {
         frame.setContentPane(gradientPanel);
         frame.setVisible(true);
     }
-    private static JPanel getLightPanel() {
+    private JPanel getLightPanel() {
         JPanel gradientPanel;
         gradientPanel = new JPanel() {
             @Override
@@ -100,18 +105,25 @@ class GameFrame {
         };
         return gradientPanel;
     }
-    static void updateUI() {
-        Location.setText(DatabaseManager.retrieveDataFromDatabase("Location"));
-        Body.setText(DatabaseManager.retrieveDataFromDatabase("Body"));
-        Option1.setText(DatabaseManager.retrieveDataFromDatabase("Option1"));
-        logger.info("UI updated successfully.");
-        if(GameController.phaseKey.equals("2D") || GameController.phaseKey.equals("3G")){
-            Option2.setVisible(false);
-        } else {
-            Option2.setText(DatabaseManager.retrieveDataFromDatabase("Option2"));
+    void updateUI() {
+        try {
+            Location.setText(FrameDBManager.retrieveDataFromDatabase("Location"));
+            Body.setText(FrameDBManager.retrieveDataFromDatabase("Body"));
+            Option1.setText(FrameDBManager.retrieveDataFromDatabase("Option1"));
+
+            // TODO Refactor to find a way to make the following code mantainable and sustainable.
+            if(FrameController.phaseKey.equals("2D") || FrameController.phaseKey.equals("3G")){
+                Option2.setVisible(false);
+            } else {
+                Option2.setText(FrameDBManager.retrieveDataFromDatabase("Option2"));
+            }
+
+            logger.info("UI updated successfully.");
+        } catch (NullPointerException e) {
+            logger.error(e);
         }
     }
-    static void showStoryFrame() {
+    void showStoryFrame() {
         // Declaration of frame disposition and presentation
         String windowName = "Un Monde Sans Danger";
         JFrame frame = new JFrame(windowName);
@@ -144,8 +156,8 @@ class GameFrame {
         mainOutputPanel.add(Body);
         mainOutputPanel.setOpaque(false);
 
-        Option1.addActionListener(e -> GameController.nextPhaseKey("Option1"));
-        Option2.addActionListener(e -> GameController.nextPhaseKey("Option2"));
+        Option1.addActionListener(e -> FrameController.nextPhaseKey("Option1"));
+        Option2.addActionListener(e -> FrameController.nextPhaseKey("Option2"));
 
         gradientPanel.setLayout(new BorderLayout());
         gradientPanel.add(buttonPanel, BorderLayout.SOUTH);
