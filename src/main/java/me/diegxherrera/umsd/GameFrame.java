@@ -9,21 +9,37 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 class GameFrame {
+    // Dependency Injection fields
     private final DIContainer container;
-    private final GameController frameController;
-    private final DatabaseManager frameDBManager;
+    private GameController frameController;
+    private DatabaseManager frameDBManager;
 
-    // All components of the interface are declared in here:
-    JLabel Location = new JLabel(frameDBManager.retrieveDataFromDatabase("Location"));
-    JLabel Body = new JLabel(frameDBManager.retrieveDataFromDatabase("Body"));
-    JButton Option1 = new JButton(frameDBManager.retrieveDataFromDatabase("Option1"));
-    JButton Option2 = new JButton(frameDBManager.retrieveDataFromDatabase("Option2"));
+    // Logger for the program
     protected final Logger logger = LogManager.getLogger();
+
+    // User Interface fields
+    private JLabel Location;
+    private JLabel Body;
+    private JButton Option1;
+    private JButton Option2;
 
     public GameFrame(DIContainer container) {
         this.container = container;
         this.frameController = container.getGameController();
         this.frameDBManager = container.getDatabaseManager();
+        initializeComponents();
+    }
+
+    public void setDependencies(DIContainer container) {
+        this.frameController = container.getGameController();
+        this.frameDBManager = container.getDatabaseManager();
+    }
+
+    private void initializeComponents() {
+        Location = new JLabel(frameDBManager.retrieveDataFromDatabase("Location"));
+        Body = new JLabel(frameDBManager.retrieveDataFromDatabase("Body"));
+        Option1 = new JButton(frameDBManager.retrieveDataFromDatabase("Option1"));
+        Option2 = new JButton(frameDBManager.retrieveDataFromDatabase("Option2"));
     }
 
     void showEndingFrames() {
@@ -35,7 +51,7 @@ class GameFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        String[] phaseKeyArray = FrameController.phaseKey.split("");
+        String[] phaseKeyArray = frameController.phaseKey.split("");
 
         String mainText;
         if (phaseKeyArray[0].equals("O")){
@@ -49,9 +65,9 @@ class GameFrame {
         MainTitle.setBorder(new EmptyBorder(20, 10, 10, 10));
         MainTitle.setFont(new Font("Segoe UI", Font.BOLD, 50));
 
-        JLabel Body = new JLabel(FrameDBManager.retrieveDataFromDatabase("GameOver"), SwingConstants.CENTER);
+        JLabel Body = new JLabel(frameDBManager.retrieveDataFromDatabase("GameOver"), SwingConstants.CENTER);
         if (phaseKeyArray[0].equals("O")){
-            Body = new JLabel("<HTML><center>" + FrameDBManager.retrieveDataFromDatabase("GameOver") +
+            Body = new JLabel("<HTML><center>" + frameDBManager.retrieveDataFromDatabase("GameOver") +
                     "</center></HTML>", SwingConstants.CENTER);
         } else if (phaseKeyArray[0].equals("W")) {
             Body = new JLabel("<HTML><center>Has conseguido llegar al final (realmente no sé cómo). Enhorabuena " +
@@ -65,7 +81,7 @@ class GameFrame {
 
         JButton O1 = new JButton("Volver al menú.");
         O1.addActionListener(e -> {
-            FrameController.phaseKey = "0";
+            frameController.phaseKey = "0";
             showStoryFrame();
         });
 
@@ -107,15 +123,15 @@ class GameFrame {
     }
     void updateUI() {
         try {
-            Location.setText(FrameDBManager.retrieveDataFromDatabase("Location"));
-            Body.setText(FrameDBManager.retrieveDataFromDatabase("Body"));
-            Option1.setText(FrameDBManager.retrieveDataFromDatabase("Option1"));
+            Location.setText(frameDBManager.retrieveDataFromDatabase("Location"));
+            Body.setText(frameDBManager.retrieveDataFromDatabase("Body"));
+            Option1.setText(frameDBManager.retrieveDataFromDatabase("Option1"));
 
             // TODO Refactor to find a way to make the following code mantainable and sustainable.
-            if(FrameController.phaseKey.equals("2D") || FrameController.phaseKey.equals("3G")){
+            if(frameController.phaseKey.equals("2D") || frameController.phaseKey.equals("3G")){
                 Option2.setVisible(false);
             } else {
-                Option2.setText(FrameDBManager.retrieveDataFromDatabase("Option2"));
+                Option2.setText(frameDBManager.retrieveDataFromDatabase("Option2"));
             }
 
             logger.info("UI updated successfully.");
@@ -156,8 +172,8 @@ class GameFrame {
         mainOutputPanel.add(Body);
         mainOutputPanel.setOpaque(false);
 
-        Option1.addActionListener(e -> FrameController.nextPhaseKey("Option1"));
-        Option2.addActionListener(e -> FrameController.nextPhaseKey("Option2"));
+        Option1.addActionListener(e -> frameController.nextPhaseKey("Option1"));
+        Option2.addActionListener(e -> frameController.nextPhaseKey("Option2"));
 
         gradientPanel.setLayout(new BorderLayout());
         gradientPanel.add(buttonPanel, BorderLayout.SOUTH);

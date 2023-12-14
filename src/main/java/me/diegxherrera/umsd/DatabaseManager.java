@@ -6,10 +6,30 @@ import org.apache.logging.log4j.Logger;
 
 public class DatabaseManager {
     protected static final Logger logger = LogManager.getLogger();
-    DIContainer DBContainer = new DIContainer();
-    GameController DBController = DBContainer.getGameController();
-    GameFrame DBFrame = DBContainer.getGameFrame();
+    private final DIContainer container;
+    private GameController DBController;
+    private GameFrame DBFrame;
 
+    public DatabaseManager(DIContainer container) {
+        this.container = container;
+        this.DBController = container.getGameController();
+        this.DBFrame = container.getGameFrame();
+    }
+
+    public void setDependencies(DIContainer container) {
+        this.DBFrame = container.getGameFrame();
+        this.DBController = container.getGameController();
+    }
+
+    /**
+     * This function runs the query to the SQL database using the requestedContent and
+     * then returns it in a String. Setting up the query requires of url, username and
+     * password to effectively run the Connection making an instance of connection from
+     * the JDBC connector
+     * @param requestedContent
+     * @return Data retrieved in String type
+     * @throws SQLException
+     */
     public String retrieveDataFromDatabase(String requestedContent)  {
         String url = "jdbc:mysql://localhost:3306/UMSD";
         String username = "root";
