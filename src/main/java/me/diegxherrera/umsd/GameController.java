@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class GameController {
     String phaseKey = "0";
-    protected static final Logger logger = LogManager.getLogger();
+    protected static final Logger logger = LogManager.getLogger(GameController.class);
 
     // Dependency injection fields
     private final DIContainer container;

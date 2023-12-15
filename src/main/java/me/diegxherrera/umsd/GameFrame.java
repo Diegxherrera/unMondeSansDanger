@@ -15,7 +15,7 @@ class GameFrame {
     private DatabaseManager frameDBManager;
 
     // Logger for the program
-    protected final Logger logger = LogManager.getLogger();
+    protected final Logger logger = LogManager.getLogger(GameFrame.class);
 
     // User Interface fields
     private JLabel Location;

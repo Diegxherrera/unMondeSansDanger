@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class DatabaseManager {
-    protected static final Logger logger = LogManager.getLogger();
+    protected static final Logger logger = LogManager.getLogger(DatabaseManager.class);
     private final DIContainer container;
     private GameController DBController;
     private GameFrame DBFrame;
